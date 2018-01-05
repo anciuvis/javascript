@@ -1,8 +1,29 @@
 <!DOCTYPE html>
   <body>
     <script type="text/javascript">
-      console.log ("Hi console"); /*browserio inspektoriuje consoleje rodomas tekstas/logas*/
-      alert ("Hello World!"); /*parodo iisokanti langa alerta*/
+      console.log ('Hi console'); /*browserio inspektoriuje consoleje rodomas tekstas/logas*/
+      alert ('Hello World!'); /*parodo issokanti langa alerta*/
+      var a = 5;
+      var b = 10;
+      var c = a+b;
+      console.log (c);
+      c = c+3;
+      console.log (c);
+      b = c+3-a*2; /*atlikimo eiliskumas kaip matematikoj*/
+      console.log (b);
+      var a = 1/3;
+      console.log (a);
+      a = a*3;
+      console.log (a); /* gaunasi lygiai 1, nors pagal ideja turi buti 0.9999..*/
+      console.log (2.2*0.1); /* atsiranda ..0003 po kablelio, del to kad dvejetaineje taip skaiciuojama*/
+      // string tipas - tekstui. tai yra 'nuoroda'. Javoj - stringas yra objektas, C stringas yra reiksme. kolkas rasysime kaip paprasta reiksme.
+      // Javascriptas moka sudeti stringus. atimti nemoka.
+      a = 'Hello';
+      b = 'World';
+      c = a+b;
+      console.log (c);
+      c = a+' '+b;
+      console.log (c);
     </script>
   </body>
 </html>
