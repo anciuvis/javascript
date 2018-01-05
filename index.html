@@ -1,21 +1,21 @@
 <!DOCTYPE html>
   <body>
     <script type="text/javascript">
-      console.log ('Hi console'); /*browserio inspektoriuje consoleje rodomas tekstas/logas*/
-      alert ('Hello World!'); /*parodo issokanti langa alerta*/
+      console.log ('Hi console'); //browserio inspektoriuje consoleje rodomas tekstas/logas
+      alert ('Hello World!'); //parodo issokanti langa alerta
       var a = 5;
       var b = 10;
       var c = a+b;
       console.log (c);
       c = c+3;
       console.log (c);
-      b = c+3-a*2; /*atlikimo eiliskumas kaip matematikoj*/
+      b = c+3-a*2; //atlikimo eiliskumas kaip matematikoj
       console.log (b);
       var a = 1/3;
       console.log (a);
       a = a*3;
-      console.log (a); /* gaunasi lygiai 1, nors pagal ideja turi buti 0.9999..*/
-      console.log (2.2*0.1); /* atsiranda ..0003 po kablelio, del to kad dvejetaineje taip skaiciuojama*/
+      console.log (a); // gaunasi lygiai 1, nors pagal ideja turi buti 0.9999..
+      console.log (2.2*0.1); // atsiranda ..0003 po kablelio, del to kad dvejetaineje taip skaiciuojama
       // string tipas - tekstui. tai yra 'nuoroda'. Javoj - stringas yra objektas, C stringas yra reiksme. kolkas rasysime kaip paprasta reiksme.
       // Javascriptas moka sudeti stringus. atimti nemoka.
       a = 'Hello';
@@ -24,6 +24,16 @@
       console.log (c);
       c = a+' '+b;
       console.log (c);
+      // console.log ("Hello "console""); - nesuveikia nes supranta kaip "Hello " ir atskira "" o CONSOLE atsiduria tarp stringu ir suprantama kaip komanda, o javascriptas tokios neturi
+      console.log ('Hello "console"'); // - veikia
+      console.log ("Hello my friend's cat"); // - veikia ir su dvigubom ir su viengubom kabutemis
+      // console.log ('Hello my friend's cat'); - nesuveikia, nes vel gi pirma vienguba kabute supranta kaip stringo pabaiga, o galas S CAT - tokios komandos nera javascripte
+      console.log ('Hello my friend\'s cat'); // suveikia su \ - escape character
+      console.log ('Hello my friend\\\'s cat'); //kad butu atspausdinta ir backslashas ir vienguba kabute - pries kiekviena symboli naudoti backslasha (esc char)
+      //kintamasis A ir kintamasis a - skirtingi dalykai javascripte
+      // kintamuju pavadinimu pavyzdziai: bendraSaskaitosSuma (camelcase - pradedu mazaja raide, visi kiti zodziai is didziosios raides, atejo is Java), arba bendra_saskaitos_suma - rgi priimtinas variantas
+      // qty - pavadinimas quantity ir pns, kad butu prasmingas reiksmingas kintamasis
+      // javascripte komentaru variantai - dvigubas slashas // - nuo sitos vietos iki eilutes pabaigos viskas taps kommentu ,arba /*   */- ilgas komentaras su uzsidarymu, arba htmle komentuojama dazniausiai <!--   --> su uzdarymu
     </script>
   </body>
 </html>
