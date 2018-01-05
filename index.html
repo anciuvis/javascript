@@ -1,15 +1,15 @@
 <!DOCTYPE html>
   <body>
     <script type="text/javascript">
-      console.log ('Hi console'); //browserio inspektoriuje consoleje rodomas tekstas/logas
-      alert ('Hello World!'); //parodo issokanti langa alerta
+      console.log ('Hi console'); // browserio inspektoriuje consoleje rodomas tekstas/logas
+      alert ('Hello World!'); // parodo issokanti langa alerta
       var a = 5;
       var b = 10;
       var c = a+b;
       console.log (c);
       c = c+3;
       console.log (c);
-      b = c+3-a*2; //atlikimo eiliskumas kaip matematikoj
+      b = c+3-a*2; // atlikimo eiliskumas kaip matematikoj
       console.log (b);
       var a = 1/3;
       console.log (a);
@@ -30,10 +30,37 @@
       // console.log ('Hello my friend's cat'); - nesuveikia, nes vel gi pirma vienguba kabute supranta kaip stringo pabaiga, o galas S CAT - tokios komandos nera javascripte
       console.log ('Hello my friend\'s cat'); // suveikia su \ - escape character
       console.log ('Hello my friend\\\'s cat'); //kad butu atspausdinta ir backslashas ir vienguba kabute - pries kiekviena symboli naudoti backslasha (esc char)
-      //kintamasis A ir kintamasis a - skirtingi dalykai javascripte
+      // kintamuju tipai - number ir string
+      // kintamasis A ir kintamasis a - skirtingi dalykai javascripte
       // kintamuju pavadinimu pavyzdziai: bendraSaskaitosSuma (camelcase - pradedu mazaja raide, visi kiti zodziai is didziosios raides, atejo is Java), arba bendra_saskaitos_suma - rgi priimtinas variantas
       // qty - pavadinimas quantity ir pns, kad butu prasmingas reiksmingas kintamasis
       // javascripte komentaru variantai - dvigubas slashas // - nuo sitos vietos iki eilutes pabaigos viskas taps kommentu ,arba /*   */- ilgas komentaras su uzsidarymu, arba htmle komentuojama dazniausiai <!--   --> su uzdarymu
-    </script>
+      var t;
+      var n;
+      t = 'text';
+      n = 5;
+      console.log (n+t);
+      var r = n+t; // automatine tipu konvertacija - sudeda stringa su numberiu. num value 5 pavercia i stringa '5'
+      console.log (r);
+      r = n*t;
+      console.log (r); // rezultatas - Nan - skaicius kuris yra ne skaicius Not a Number
+      r = n-t;
+      console.log (r); // rezultatas irgi Nan
+      // Infinity - irgi number tipas - gali buti teigiamas arba neigiamas
+      var l = true;
+      r = n*l;
+      console.log (r); // rezultatas 5
+      l = false;
+      r = n*l;
+      console.log (r); //rezultatas 0
+      l = true;
+      r = n+l;
+      console.log (r); //rezultatas 6
+      r = t+l;
+      console.log (r); //rezultatas texttrue
+      // undefined - reiksme kai apibreziam kintamaji var t pvz, bet nepasakom reiksmes, tuo laiku priskiria reiksme undefined tam kintamajam
+      // null - speciali reiksme, reikia tuscia, kintamasis kurio reiksmes nera;
+
+       </script>
   </body>
 </html>
