@@ -3,26 +3,27 @@
     <script type="text/javascript">
       console.log ('Hi console'); // browserio inspektoriuje consoleje rodomas tekstas/logas
       alert ('Hello World!'); // parodo issokanti langa alerta
-      var a = 5;
-      var b = 10;
-      var c = a+b;
+      var a=5;
+      var b=10;
+      var c=a+b;
       console.log (c);
-      c = c+3;
+      c=c+3;
       console.log (c);
-      b = c+3-a*2; // atlikimo eiliskumas kaip matematikoj
+      b=c+3-a*2; // atlikimo eiliskumas kaip matematikoj
       console.log (b);
-      var a = 1/3;
+      var a=1/3;
       console.log (a);
-      a = a*3;
+      a=a*3;
       console.log (a); // gaunasi lygiai 1, nors pagal ideja turi buti 0.9999..
       console.log (2.2*0.1); // atsiranda ..0003 po kablelio, del to kad dvejetaineje taip skaiciuojama
       // string tipas - tekstui. tai yra 'nuoroda'. Javoj - stringas yra objektas, C stringas yra reiksme. kolkas rasysime kaip paprasta reiksme.
       // Javascriptas moka sudeti stringus. atimti nemoka.
-      a = 'Hello';
-      b = 'World';
-      c = a+b;
+      console.log ('----------------')
+      a='Hello';
+      b='World';
+      c=a+b;
       console.log (c);
-      c = a+' '+b;
+      c=a+' '+b;
       console.log (c);
       // console.log ("Hello "console""); - nesuveikia nes supranta kaip "Hello " ir atskira "" o CONSOLE atsiduria tarp stringu ir suprantama kaip komanda, o javascriptas tokios neturi
       console.log ('Hello "console"'); // - veikia
@@ -37,104 +38,107 @@
       // javascripte komentaru variantai - dvigubas slashas // - nuo sitos vietos iki eilutes pabaigos viskas taps kommentu ,arba /*   */- ilgas komentaras su uzsidarymu, arba htmle komentuojama dazniausiai <!--   --> su uzdarymu
       var t;
       var n;
-      t = 'text';
-      n = 5;
+      t='text';
+      n=5;
       console.log (n+t);
-      var r = n+t; // automatine tipu konvertacija - sudeda stringa su numberiu. num value 5 pavercia i stringa '5'
+      var r=n+t; // automatine tipu konvertacija - sudeda stringa su numberiu. num value 5 pavercia i stringa '5'
       console.log (r);
-      r = n*t;
+      r=n*t;
       console.log (r); // rezultatas - Nan - skaicius kuris yra ne skaicius Not a Number
-      r = n-t;
+      r=n-t;
       console.log (r); // rezultatas irgi Nan
       // Infinity - irgi number tipas - gali buti teigiamas arba neigiamas
-      var l = true;
-      r = n*l;
+      var l=true;
+      r=n*l;
       console.log (r); // rezultatas 5
-      l = false;
-      r = n*l;
+      l=false;
+      r=n*l;
       console.log (r); //rezultatas 0
-      l = true;
-      r = n+l;
+      l=true;
+      r=n+l;
       console.log (r); //rezultatas 6
-      r = t+l;
+      r=t+l;
       console.log (r); //rezultatas texttrue
       // undefined - reiksme kai apibreziam kintamaji var t pvz, bet nepasakom reiksmes, tuo laiku priskiria reiksme undefined tam kintamajam
       // null - speciali reiksme, reikia tuscia, kintamasis kurio reiksmes nera;
       // object type
       // function
       // symbol - nesnekesim apie sita is viso.
-      r = 15;
+      r=15;
       if (r>10) { // if yra boolean operatorius, r>10 igaunha arba true arba false reiksme
         console.log ('didelis skaicius');
         } else {
          console.log ('mazas skaicius');
         }
-        r = 15;
-        if (r>10)  // if yra boolean operatorius, r>10 igaunha arba true arba false reiksme
-          console.log ('didelis skaicius');
-      // else
-      //   console.log ('mazas skaicius');
-      // // curly bracketai atskiria VEIKSMU BLOKUS. jeigu po operatoriaus eina tik tai vienas veiksmu blokas, galima rasyti be curly braketu ir suveiks
-      // if (r>10)
-      //   console.log ('did');
-      // else
-      //   r = r-1;
-      //   console.log (r); //spausdins bet ne taip
-      // if (r>10)
-      //   console.log ('did');
-      // else {
-      //   r = r-1;
-      //   console.log (r);
-      // }
-      // // su else if curly bracketus nevedam - isskirtinis atvejis
-      // var r = "6a"; // kai "6a" nesuveikia auto conversion. kai "6" - suveikia
-      // if (r>10) {
-      //   console.log ('didelis skaicius');
-      // } else if (r>5) {
-      //   console.log ('vidutinis');
-      // } else if (r>=0) {
-      //   console. log ('mazas');
-      // } else {
-      //   console.log ('neigiamas');
-      // }
-      // //
-      // var t1 = 67; // jeigu be kabuciu, butu tada t2 spausdinta
-      // var t2 = 102;
-      // if (t1>t2) {
-      //   console.log ("t1"); // t1 spausdins, nes lygina tik tarp stringu dvieju - 6 kodas yra daugiau uz 1 - lygina pirma simboli. jeig bent vienas kintmasis t1 ar t2 uzrasytas kaipo number - suveikia auto conversion i number ir antra
-      // } else {
-      //   console.log ("t2");
-      // }
-      // //
-      // var t1="67";
-      // var t2="101";
-      // var b=t1>t2;
-      // var t3=1;
-      // var t4=5;
-      // b=b&t3>t4;
-      // if (b) {
-      //   console.log ('keista');
-      // } else {
-      //   console.log ('ok');
-      // }
+      r = 15;
+      if (r>10)  // if yra boolean operatorius, r>10 igaunha arba true arba false reiksme
+        console.log ('didelis skaicius');
+      else
+        console.log ('mazas skaicius');
+      // curly bracketai atskiria VEIKSMU BLOKUS. jeigu po operatoriaus eina tik tai vienas veiksmu blokas, galima rasyti be curly braketu ir suveiks
+      if (r>10)
+        console.log ('did');
+      else
+        r = r-1;
+        console.log (r); //spausdins bet ne taip
+      if (r>10)
+        console.log ('did');
+      else {
+        r = r-1;
+        console.log (r);
+      }
+      // su 'else if' curly bracketus nevedam - isskirtinis atvejis
+      var r = "6a"; // kai "6a" nesuveikia auto conversion. kai "6" - suveikia
+      if (r>10) {
+        console.log ('didelis skaicius');
+      } else if (r>5) {
+        console.log ('vidutinis');
+      } else if (r>=0) {
+        console. log ('mazas');
+      } else {
+        console.log ('neigiamas');
+      }
+      //
+      var t1 = 67; // jeigu be kabuciu, butu tada t2 spausdinta
+      var t2 = 102;
+      if (t1>t2) {
+        console.log ("t1"); // t1 spausdins, nes lygina tik tarp stringu dvieju - 6 kodas yra daugiau uz 1 - lygina pirma simboli. jeig bent vienas kintmasis t1 ar t2 uzrasytas kaipo number - suveikia auto conversion i number ir antra
+      } else {
+        console.log ("t2");
+      }
+      //
+      var t1="67";
+      var t2="101";
+      var b=t1>t2;
+      var t3=1;
+      var t4=5;
+      b=b&t3>t4;
+      if (b) {
+        console.log ('keista');
+      } else {
+        console.log ('ok');
+      }
       // kai du ampersandai && arba du paipai || tada tikrins antra tik tuo atveju jei pirma neduoda 100% rezultato
       // su !! dviem suaktukais duoda pradine reiksme
       // = - yra priskyrimo zenklas
       // == - yra palyginimo zenklas
       // === - palyginimo zenklas kai 'if and only if'
+      console.log ('----------------')
       var a=0;
       while (a<5) {
         console.log (a);
         a=a+1;
       }
       console.log ('pabaiga'+a);
+      console.log ('----------------')
       var a=0;
       while (a++<5) {
         console.log (a);
+      }
       // ++a paimam reiksme pridedam vieneta ir padedam atgal. ++a pradziai padininti vienetu ir paskui atlikt visus veiksmus (lyginimus). a++ atvirksciai - pradziai veiksmai, paskui padidinti
       // tas pats su --a ir a--;
-      }
       console.log ('pabaiga'+a);
+      console.log ('----------------')
       var a=0;
       while (a<7) {
         console.log (a);
@@ -142,10 +146,12 @@
       }
       console.log ('pabaiga'+a);
       a+7 // nieko nepadaro nes neiraso niekur rezultata
+      console.log ('----------------')
       var a=0;
       if (a+3>2) {
         console.log (a); // spausdina nuli, nes a+3>2 reiksme yra true, bet ant a mes nieko nepriskiriam, tai spausdina a reiksme kuri yra nuli;
       }
+      console.log ('----------------')
       var a=1;
       var b=0;
       while (a<=10) {
@@ -153,6 +159,7 @@
       console.log (b);
       a+=1;
       }
+      console.log ('----------------')
       // kitas variantas
       var i=1;
       var s=0;
@@ -161,6 +168,7 @@
         console.log (s);
       } while (i<=10);
       console.log ('end'+s);
+      console.log ('----------------')
       // amzinas ciklas:
       // var i=1;
       // var s=0;
