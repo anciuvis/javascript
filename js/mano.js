@@ -93,31 +93,92 @@
 // console.log(m1.spalva);
 //spausdina zalias
 //objektai atmintyje yra sukuriami automatiskai, automatiskai jie yra ir istrinami, kai nebeuztenka atminties cia JS padaro darba uz mus
-var m1={
-  gamintojas:'Mazda',
-  spalva:'pilka',
-  metai:2005,
-  modelis:'3',
-  variklis:{
-    kt:'benzinas',
-    turis:1.6
-  }
-}
+// var m1={
+//   gamintojas:'Mazda',
+//   spalva:'pilka',
+//   metai:2005,
+//   modelis:'3',
+//   variklis:{
+//     kt:'benzinas',
+//     turis:1.6
+//   }
+// }
 // variklis - kitas objektas, irgi nuoroda sekanti
-console.log(m1.variklis.kt);
+// console.log(m1.variklis.kt);
 // spausdina kuro tipa
-var m2={
-  gamintojas:'Zigulis',
-  spalva:'zalias',
-  metai:21011,
-  modelis:'3'
-}
-m2.variklis=m1.variklis;
-m2.variklis.turis=2.2;
-console.log(m1.variklis.turis);
+// var m2={
+//   gamintojas:'Zigulis',
+//   spalva:'zalias',
+//   metai:21011,
+//   modelis:'3'
+// }
+// m2.variklis=m1.variklis;
+// m2.variklis.turis=2.2;
+// console.log(m1.variklis.turis);
 // tapo 2.2, nes jie rodo i ta pati objekta, keiciasi tas pats objektas atminty
-m1=null;
+// m1=null;
 //objektas variklis nera ismetamas garbage collectoriaus, nes i ji yra nuorodos is m2, vadinas palieka atmintyje. o mazda istrina (gamintoja,spalva,metai,modelis)
 // objektas turi sqavybes, kaip kintamijei jie: gali buti kaiciai, stringai, kiti objektai, funkcijos
-//string yra objektas atmintyje. Immutable.
-var s='string';
+//string yra objektas atmintyje. Immutable. labai naudojamas tipas. paimta is Javos
+// var s='String';
+// var k='kitas';
+// k=k+s;
+// JS sukuria nauja objekta kitasString, o paliktas objektas 'kitas' yra istrinamas is atminties su garbage collectorium, nebent jis dar taps naudojamu greitai
+// masyvai kaip objekto tipas
+// var m=['pirmas','antras','trecias',5,m1];
+// m - objektas. turi specifini apdorojima. jeigu objektu elementus mes pasiekiam per savybes (spalva: zalias pvz), tai masyvo elementus mes pasiekiam per skaicius
+// elementai masyve numeruojami nuo nulio 0:'pirmas', 1:'antras' ir t.t. Lauztiniai skriaustai nurodo, kad einam per indeksa elementu
+// console.log(m[1]);
+// pirmas elementas yra antras pagal eiliskuma
+// console.log(m.length);
+// spausdina 3, nes trys elementai yra masyve
+// JS netipizuotas, todel galima i masyva deti stringus, skaicius, true/false, nuoroda i objekta, funkcija
+//nereikia kaip pvz pascalyje nurodyti masyvo ilgi ir tipa, jis pats suprant
+// console.log(m[4].spalva);
+//duoda pilka - m1 savybes spalva reiksme
+// m[1]=2;
+// masyvas nera immutable kaip stringas, todel galim keisti kiekviena elementa jame, ju reiksmes
+// m.push('naujas');
+// atsiras naujas elementas, kurio reiksme yra naujas
+// pats masyvas turi savybe/funkcija push - sukurti nauja elementa
+// m.pop();
+// istrina paskutini elementa masyvo. galima kartoti kiek nori, vis paskutini pratrins
+// var n=['pirmas','antras','trecias',5,true];
+// console.log(n); -taip isduoda info, bet netinka
+// for (var i=0; i<n.length; i++) {
+// console.log(n[i]);
+// }
+// var tm=[];
+//tuscias masyvas
+// function mLength (msg) {
+//   do {
+//     var l=prompt (msg);
+//     l=parseInt (l);
+//   } while (isNaN (l));
+//   return l;
+// }
+// l=mLength ('ivesk kiek vesi skaiciu');
+// var m=[];
+// for (var i=1; i<=l; i++) {
+//   m.push(mLength ('ivesk '+i+'aji skaiciu'));
+// }
+// for (i=0; i<m.length; i++) {
+// console.log(m[i]);
+// }
+// var s=0;
+// for (i=0; i<m.length; i++) {
+//   s+=m[i];
+// }
+// console.log(s);
+//
+function printParam () {
+  for (var i = 0; i < arguments.length; i++) {
+    console.log(arguments[i],typeof arguments[i]);
+  }
+  // arguments - nera grynas masyvas, bet i ji galime kreiptis kad suzinoti paduodamus elementus, argumentu 'masyvo' ilgi
+}
+printParam (3, false);
+printParam ('a', 5, 'b', true, 3.14);
+//
+Array.isArray(m)
+// grazina true jeigu yra masyvas,  false jeigu objektas, funkcija, kintamasis ar kita
