@@ -223,7 +223,7 @@ do {
   console.log('Computer selected: ',c);
   if ((c=='rock'&&x=='paper')||(c=='paper'&&x=='scissors')||(x=='scissors'&&x=='rock')) {
   console.log('You won');
-  } else if ((c==x)) {
+  } else if (c==x) {
   console.log('Stalemate');
   } else {
   console.log('Computer won');
