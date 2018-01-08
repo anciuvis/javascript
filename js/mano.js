@@ -150,6 +150,7 @@
 // }
 // var tm=[];
 //tuscias masyvas
+////////////////////////////////
 // function mLength (msg) {
 //   do {
 //     var l=prompt (msg);
@@ -170,15 +171,63 @@
 //   s+=m[i];
 // }
 // console.log(s);
-//
-function printParam () {
-  for (var i = 0; i < arguments.length; i++) {
-    console.log(arguments[i],typeof arguments[i]);
-  }
+/////////////////
+// function printParam () {
+//   for (var i = 0; i < arguments.length; i++) {
+//     console.log(arguments[i],typeof arguments[i]);
+//   }
   // arguments - nera grynas masyvas, bet i ji galime kreiptis kad suzinoti paduodamus elementus, argumentu 'masyvo' ilgi
-}
-printParam (3, false);
-printParam ('a', 5, 'b', true, 3.14);
+// }
+// printParam (3, false);
+// printParam ('a', 5, 'b', true, 3.14);
 //
-Array.isArray(m)
-// grazina true jeigu yra masyvas,  false jeigu objektas, funkcija, kintamasis ar kita
+// Array.isArray(m)
+// - grazina true jeigu yra masyvas,  false jeigu objektas, funkcija, kintamasis ar kita
+// var m1= {
+//   g:'Mazda',
+//   s:'pilka',
+//   metai:2005,
+//   model:'3'
+// }
+// console.log(m1.s);
+// console.log(m1['s']);
+// var savybe='metai';
+// console.log(m1[savybe]);
+// savybe='g';
+// console.log(m1[savybe]);
+//
+// for (var key in m1) {
+//   console.log(m1[key]);
+// }
+// su key - suksis tiek, kiek yra savybiu, kiekviena karta garazinamas sekancia. viska uz mus paskaiciuoja JS. nezino kiek kartu prasisuks, bet zinom kad kiekvienos iteracijos metu key tures nauja pavadinima
+// nera garantuota kad objekto savybes tame prasukime eis ta pacia tvarka, kaip yra uzrasytos, bet 99% tikimybe kad bus taip isdestytos.
+//masyvo elementai visada isdestyti fiksuota tvarka
+//objekto savybes - nezinome kokia tvarka
+do {
+  var x;
+  do {
+      x=prompt ('pasirink - rock, paper or scissors');
+  } while (x!='rock'&&x!='paper'&&x!='scissors'&&x!=null);
+  if (x) {
+  console.log('zaidimas vyksta');
+  console.log('You selected: ',x);
+  var s=Math.random();
+  var c;
+  if (s<1/3)
+    c='rock';
+  } else if (s>=1/3&&s<2/3) {
+    c='paper';
+  } else {
+    c='scissors';
+  }
+  console.log('Computer selected: ',c);
+  if ((c=='rock'&&x=='paper')||(c=='paper'&&x=='scissors')||(x=='scissors'&&x=='rock')) {
+  console.log('You won');
+  } else if ((c==x)) {
+  console.log('Stalemate');
+  } else {
+  console.log('Computer won');
+  }
+}
+while (x);
+console.log('pabaiga');
