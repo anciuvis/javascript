@@ -63,9 +63,61 @@
 // Objektinis programavimas. Kas yra objektai.
 // pvz Automobilis - savybes: gamintojas, spalva, metai, modelis... Savybiu rinkinys - tai KLASE programavime.
 // Konkreti masina su konkreciom savybemis (Mazda, Pilka, 2005, 3)- OBJEKTAS. Kita masina (Zigulis, Zalia, 1979, 21011) - kitas OBJEKTAS, priklauso tai paciai KLASEI
+// var m1={
+//   gamintojas:'Mazda',
+//   spalva:'pilka',
+//   metai:2005,
+//   modelis:'3',
+// }
+// console.log(m1.spalva);
+// m1.spalva='raudona';
+// var m2=m1;
+// m2.spalva='zalia';
+// console.log(m1.spalva);
+//pakeitem spalva m2 objekte, bet keiciasi m1 irgi, nes jie turi nuoroda i ta pati objekta
+// m2.dsk=5;
+// console.log(m1.dsk);
+// atspausdina 5
+// console.log(m1.rsk);
+//duos rezultata undefined
+// console.log(typeof m1);
+// spausdina Object
+// var m2={
+//   gamintojas:'Zigulys',
+//   spalva:'zalias',
+//   metai:1979,
+//   modelis:'21011'
+// }
+// m1=m2;
+// panaikinamas rysys savybes m1, Javascripte automatiskai juos istrina 'siukslininkas' Garbage collector. Javoj galima priverstinai paleisti sita Garbage collectoriu
+// console.log(m1.spalva);
+//spausdina zalias
+//objektai atmintyje yra sukuriami automatiskai, automatiskai jie yra ir istrinami, kai nebeuztenka atminties cia JS padaro darba uz mus
 var m1={
   gamintojas:'Mazda',
   spalva:'pilka',
   metai:2005,
+  modelis:'3',
+  variklis:{
+    kt:'benzinas',
+    turis:1.6
+  }
+}
+// variklis - kitas objektas, irgi nuoroda sekanti
+console.log(m1.variklis.kt);
+// spausdina kuro tipa
+var m2={
+  gamintojas:'Zigulis',
+  spalva:'zalias',
+  metai:21011,
   modelis:'3'
 }
+m2.variklis=m1.variklis;
+m2.variklis.turis=2.2;
+console.log(m1.variklis.turis);
+// tapo 2.2, nes jie rodo i ta pati objekta, keiciasi tas pats objektas atminty
+m1=null;
+//objektas variklis nera ismetamas garbage collectoriaus, nes i ji yra nuorodos is m2, vadinas palieka atmintyje. o mazda istrina (gamintoja,spalva,metai,modelis)
+// objektas turi sqavybes, kaip kintamijei jie: gali buti kaiciai, stringai, kiti objektai, funkcijos
+//string yra objektas atmintyje. Immutable.
+var s='string';
