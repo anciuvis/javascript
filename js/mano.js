@@ -241,61 +241,61 @@
 // }
 // console.log (liekana (7,3));
 // reikia kad i funkcija gaunu bet koki kintamaji. jei number boolean or string - parasyti reiksme. jei objektas - print all object properties. jei dar viduj objektas - dar listu i gili. ei masyvas - sarasas visu jo elementu. jei elementai yra objektai - kad vel listu i gili ir t.t.
-function print (p, path) {
-  if (typeof p==='string'||typeof p==='number'||typeof p ==='boolean'||typeof p==='undefined'||p===null) {
-    console.log(p,typeof p);
-  } else if (typeof p==='function') {
-    console.log(p.toString());
-  } else if (typeof p==='object') {
-    if (!Array.isArray(path)) {
-      path=[];
-    }
-    for (var i = 0; i < path.length; i++) {
-      if (path[i]===p) {
-        console.log('circular');
-        return;
-      }
-    }
-    path.push(p);
-    if (Array.isArray(p)) {
-      console.log('masyvas');
-      for (var i = 0; i < p.length; i++) {
-        console.log(i);
-        print (p [i], path);
-      }
-    } else {
-      console.log('objektas');
-      for (var key in p) {
-        console.log(key);
-        print (p[key], path)
-      }
-    }
-    path.pop();
-  } else {
-    console.log('nezinoma reisme');
-  }
-}
-var o={
-  p1: true,
-  p2: {
-    p11: 3.14
-  }
-}
-o.p2.p12=o;
-var o1 ={
-  test: "test"
-};
-/////
-print ({
-  gamintojas:'mazda',
-  spalva:'pilka',
-  metai: 2005,
-  keleiviai:[print,4,o,6, o1, o1],
-  variklis:{
-    turis: 2,
-    tipas:'benzinas'
-  }
-});
+// function print (p, path) {
+//   if (typeof p==='string'||typeof p==='number'||typeof p ==='boolean'||typeof p==='undefined'||p===null) {
+//     console.log(p,typeof p);
+//   } else if (typeof p==='function') {
+//     console.log(p.toString());
+//   } else if (typeof p==='object') {
+//     if (!Array.isArray(path)) {
+//       path=[];
+//     }
+//     for (var i = 0; i < path.length; i++) {
+//       if (path[i]===p) {
+//         console.log('circular');
+//         return;
+//       }
+//     }
+//     path.push(p);
+//     if (Array.isArray(p)) {
+//       console.log('masyvas');
+//       for (var i = 0; i < p.length; i++) {
+//         console.log(i);
+//         print (p [i], path);
+//       }
+//     } else {
+//       console.log('objektas');
+//       for (var key in p) {
+//         console.log(key);
+//         print (p[key], path)
+//       }
+//     }
+//     path.pop();
+//   } else {
+//     console.log('nezinoma reisme');
+//   }
+// }
+// var o={
+//   p1: true,
+//   p2: {
+//     p11: 3.14
+//   }
+// }
+// o.p2.p12=o;
+// var o1 ={
+//   test: "test"
+// };
+// /////
+// print ({
+//   gamintojas:'mazda',
+//   spalva:'pilka',
+//   metai: 2005,
+//   keleiviai:[print,4,o,6, o1, o1],
+//   variklis:{
+//     turis: 2,
+//     tipas:'benzinas'
+//   }
+// });
 // print ('q');
 // print (3.14);
 // print (null);
@@ -313,3 +313,39 @@ print ({
 // todel butina panaudoti funkcijos parametru path, kad skaiciuotu praeita kelia iki elemento/objekto .
 // jeigu tas pats objektas eina kelis kartus masyve/objekte - reikia padaryti ir path.pop() gale bloko kur apdorojamas input type Object.
 // tada neskaiciuos jo kaip circular, o kaip kita (sekanti) elementa
+//////////
+// console.log(a);
+// mes klaida kadangi kintamasis a nezinomas
+// console.log(a);
+// var a=5;
+// console.log(a);
+//meta pradziai Undefined, paskui 5
+// JS mechanisma hoisting - perkelti
+// veikimo principas - perbega per visas eilutes ir ziuri ar yra toks var
+//tas pats su funkcijoms - kvieciam funkcija, o funkcija yra aprasyta toliau
+// kai sitas mechanismas prabega - ir susikuria iskart atmintyje, bet be reiksmes, tik kintamuosius/funkcijas. todel meta undefined pirmoj eilutej
+// VAR - operatorius, aprasantis kintamaji
+// JS turi dar kitus op., kuriu pagalba galima aprasyt kintamuosius - LET, CONST
+// console.log(a);
+// let a=5;
+// console.log(a);
+// siu atveju nesuveiks, nes operatorius LET nera hoistinamas
+// kintamasis susikuria tik tada, kai yra kvieciamas LET. siuo atveju grynai step-by-step veikia programa
+//////////
+// let a=5;
+// console.log(a);
+// const A=10;
+// console.log(A);
+// A=15;
+// meta mano.js:339 Uncaught TypeError: Assignment to constant variable. - constantos pakeisti neleidzia
+////////
+const O={
+  p1:'testas',
+  p2:10
+};
+console.log(O);
+O.p1='kitas';
+O.p3=false;
+console.log(O);
+// constanta siuo atveju yra nuoroda to objekto. o viduj galim keist ka norim elementus keist pridet atimt
+// CONST ir LET ner hoistinami. atsiranda atminty tik tuo momentu kai realiai yra ivykdydami
