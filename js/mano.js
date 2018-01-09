@@ -140,7 +140,7 @@
 // masyvas nera immutable kaip stringas, todel galim keisti kiekviena elementa jame, ju reiksmes
 // m.push('naujas');
 // atsiras naujas elementas, kurio reiksme yra naujas
-// pats masyvas turi savybe/funkcija push - sukurti nauja elementa
+// pats masyvas turi savybe/funkcija push - sukurti nauja elementa. m.length - masyvo savybe (ilgis)
 // m.pop();
 // istrina paskutini elementa masyvo. galima kartoti kiek nori, vis paskutini pratrins
 // var n=['pirmas','antras','trecias',5,true];
@@ -180,7 +180,7 @@
 // }
 // printParam (3, false);
 // printParam ('a', 5, 'b', true, 3.14);
-//
+///////////////////
 // Array.isArray(m)
 // - grazina true jeigu yra masyvas,  false jeigu objektas, funkcija, kintamasis ar kita
 // var m1= {
@@ -195,7 +195,7 @@
 // console.log(m1[savybe]);
 // savybe='g';
 // console.log(m1[savybe]);
-//
+////////////////////
 // for (var key in m1) {
 //   console.log(m1[key]);
 // }
@@ -203,31 +203,113 @@
 // nera garantuota kad objekto savybes tame prasukime eis ta pacia tvarka, kaip yra uzrasytos, bet 99% tikimybe kad bus taip isdestytos.
 //masyvo elementai visada isdestyti fiksuota tvarka
 //objekto savybes - nezinome kokia tvarka
-do {
-  var x;
-  do {
-      x=prompt ('pasirink - rock, paper or scissors');
-  } while (x!='rock'&&x!='paper'&&x!='scissors'&&x!=null);
-  if (x) {
-  console.log('zaidimas vyksta');
-  console.log('You selected: ',x);
-  var s=Math.random();
-  var c;
-  if (s<1/3)
-    c='rock';
-  } else if (s>=1/3&&s<2/3) {
-    c='paper';
+// do {
+//   var x;
+//   do {
+//       x=prompt ('pasirink - rock, paper or scissors');
+//   } while (x!='rock'&&x!='paper'&&x!='scissors'&&x!=null);
+//   if (x) {
+//   console.log('zaidimas vyksta');
+//   console.log('You selected: ',x);
+//   var s=Math.random();
+//   var c;
+//   if (s<1/3)
+//     c='rock';
+//   } else if (s>=1/3&&s<2/3) {
+//     c='paper';
+//   } else {
+//     c='scissors';
+//   }
+//   console.log('Computer selected: ',c);
+//   if ((c=='rock'&&x=='paper')||(c=='paper'&&x=='scissors')||(x=='scissors'&&x=='rock')) {
+//   console.log('You won');
+//   } else if (c==x) {
+//   console.log('Stalemate');
+//   } else {
+//   console.log('Computer won');
+//   }
+// }
+// while (x);
+// console.log('pabaiga');
+//////
+// Rekursija - funkcijos kvietimo budas, kai funkcija kviecia pati save.
+// function liekana (dalinys, daliklis) {
+//   if (dalinys<daliklis) {
+//     return dalinys;
+//   }
+//   return liekana (dalinys-daliklis, daliklis);
+// }
+// console.log (liekana (7,3));
+// reikia kad i funkcija gaunu bet koki kintamaji. jei number boolean or string - parasyti reiksme. jei objektas - print all object properties. jei dar viduj objektas - dar listu i gili. ei masyvas - sarasas visu jo elementu. jei elementai yra objektai - kad vel listu i gili ir t.t.
+function print (p, path) {
+  if (typeof p==='string'||typeof p==='number'||typeof p ==='boolean'||typeof p==='undefined'||p===null) {
+    console.log(p,typeof p);
+  } else if (typeof p==='function') {
+    console.log(p.toString());
+  } else if (typeof p==='object') {
+    if (!Array.isArray(path)) {
+      path=[];
+    }
+    for (var i = 0; i < path.length; i++) {
+      if (path[i]===p) {
+        console.log('circular');
+        return;
+      }
+    }
+    path.push(p);
+    if (Array.isArray(p)) {
+      console.log('masyvas');
+      for (var i = 0; i < p.length; i++) {
+        console.log(i);
+        print (p [i], path);
+      }
+    } else {
+      console.log('objektas');
+      for (var key in p) {
+        console.log(key);
+        print (p[key], path)
+      }
+    }
+    path.pop();
   } else {
-    c='scissors';
-  }
-  console.log('Computer selected: ',c);
-  if ((c=='rock'&&x=='paper')||(c=='paper'&&x=='scissors')||(x=='scissors'&&x=='rock')) {
-  console.log('You won');
-  } else if (c==x) {
-  console.log('Stalemate');
-  } else {
-  console.log('Computer won');
+    console.log('nezinoma reisme');
   }
 }
-while (x);
-console.log('pabaiga');
+var o={
+  p1: true,
+  p2: {
+    p11: 3.14
+  }
+}
+o.p2.p12=o;
+var o1 ={
+  test: "test"
+};
+/////
+print ({
+  gamintojas:'mazda',
+  spalva:'pilka',
+  metai: 2005,
+  keleiviai:[print,4,o,6, o1, o1],
+  variklis:{
+    turis: 2,
+    tipas:'benzinas'
+  }
+});
+// print ('q');
+// print (3.14);
+// print (null);
+// print (print);
+// print ();
+// print (3==4);
+// var o={
+//   p1: true,
+//   p2: {
+//     p11: 3.14
+//   }
+// }
+// o.p2.p12='o';
+// jei vietoj o kaip stringa pakeisti i o objekta (priskirti pati save) - bus begalybe ir uzlus kompas del circular reference.
+// todel butina panaudoti funkcijos parametru path, kad skaiciuotu praeita kelia iki elemento/objekto .
+// jeigu tas pats objektas eina kelis kartus masyve/objekte - reikia padaryti ir path.pop() gale bloko kur apdorojamas input type Object.
+// tada neskaiciuos jo kaip circular, o kaip kita (sekanti) elementa
