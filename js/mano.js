@@ -42,7 +42,7 @@
 //     a=parseInt(a);
 //   } while (isNaN(a));
 //   console.log(a);
-  // iki sios vietos dar saugo a reiksme, todel gali loginti consoleje, po Returno - istrina is atminties
+//   iki sios vietos dar saugo a reiksme, todel gali loginti consoleje, po Returno - istrina is atminties
 //   return a;
 // }
 // var a1=numberInput(1,0);
@@ -62,7 +62,8 @@
 //
 // Objektinis programavimas. Kas yra objektai.
 // pvz Automobilis - savybes: gamintojas, spalva, metai, modelis... Savybiu rinkinys - tai KLASE programavime.
-// Konkreti masina su konkreciom savybemis (Mazda, Pilka, 2005, 3)- OBJEKTAS. Kita masina (Zigulis, Zalia, 1979, 21011) - kitas OBJEKTAS, priklauso tai paciai KLASEI
+// Konkreti masina su konkreciom savybemis (Mazda, Pilka, 2005, 3)- OBJEKTAS.
+// Kita masina (Zigulis, Zalia, 1979, 21011) - kitas OBJEKTAS, priklauso tai paciai KLASEI
 // var m1={
 //   gamintojas:'Mazda',
 //   spalva:'pilka',
@@ -74,12 +75,12 @@
 // var m2=m1;
 // m2.spalva='zalia';
 // console.log(m1.spalva);
-//pakeitem spalva m2 objekte, bet keiciasi m1 irgi, nes jie turi nuoroda i ta pati objekta
+// pakeitem spalva m2 objekte, bet keiciasi m1 irgi, nes jie turi nuoroda i ta pati objekta
 // m2.dsk=5;
 // console.log(m1.dsk);
 // atspausdina 5
 // console.log(m1.rsk);
-//duos rezultata undefined
+// duos rezultata undefined
 // console.log(typeof m1);
 // spausdina Object
 // var m2={
@@ -91,8 +92,8 @@
 // m1=m2;
 // panaikinamas rysys savybes m1, Javascripte automatiskai juos istrina 'siukslininkas' Garbage collector. Javoj galima priverstinai paleisti sita Garbage collectoriu
 // console.log(m1.spalva);
-//spausdina zalias
-//objektai atmintyje yra sukuriami automatiskai, automatiskai jie yra ir istrinami, kai nebeuztenka atminties cia JS padaro darba uz mus
+// spausdina zalias
+// objektai atmintyje yra sukuriami automatiskai, automatiskai jie yra ir istrinami, kai nebeuztenka atminties cia JS padaro darba uz mus
 // var m1={
 //   gamintojas:'Mazda',
 //   spalva:'pilka',
@@ -117,9 +118,9 @@
 // console.log(m1.variklis.turis);
 // tapo 2.2, nes jie rodo i ta pati objekta, keiciasi tas pats objektas atminty
 // m1=null;
-//objektas variklis nera ismetamas garbage collectoriaus, nes i ji yra nuorodos is m2, vadinas palieka atmintyje. o mazda istrina (gamintoja,spalva,metai,modelis)
+// objektas variklis nera ismetamas garbage collectoriaus, nes i ji yra nuorodos is m2, vadinas palieka atmintyje. o mazda istrina (gamintoja,spalva,metai,modelis)
 // objektas turi sqavybes, kaip kintamijei jie: gali buti kaiciai, stringai, kiti objektai, funkcijos
-//string yra objektas atmintyje. Immutable. labai naudojamas tipas. paimta is Javos
+// string yra objektas atmintyje. Immutable. labai naudojamas tipas. paimta is Javos
 // var s='String';
 // var k='kitas';
 // k=k+s;
@@ -133,9 +134,9 @@
 // console.log(m.length);
 // spausdina 3, nes trys elementai yra masyve
 // JS netipizuotas, todel galima i masyva deti stringus, skaicius, true/false, nuoroda i objekta, funkcija
-//nereikia kaip pvz pascalyje nurodyti masyvo ilgi ir tipa, jis pats suprant
+// nereikia kaip pvz pascalyje nurodyti masyvo ilgi ir tipa, jis pats suprant
 // console.log(m[4].spalva);
-//duoda pilka - m1 savybes spalva reiksme
+// duoda pilka - m1 savybes spalva reiksme
 // m[1]=2;
 // masyvas nera immutable kaip stringas, todel galim keisti kiekviena elementa jame, ju reiksmes
 // m.push('naujas');
@@ -149,8 +150,8 @@
 // console.log(n[i]);
 // }
 // var tm=[];
-//tuscias masyvas
-////////////////////////////////
+// tuscias masyvas
+// //////////////////////////////
 // function mLength (msg) {
 //   do {
 //     var l=prompt (msg);
@@ -171,16 +172,16 @@
 //   s+=m[i];
 // }
 // console.log(s);
-/////////////////
+// ///////////////
 // function printParam () {
 //   for (var i = 0; i < arguments.length; i++) {
 //     console.log(arguments[i],typeof arguments[i]);
 //   }
-  // arguments - nera grynas masyvas, bet i ji galime kreiptis kad suzinoti paduodamus elementus, argumentu 'masyvo' ilgi
+//   arguments - nera grynas masyvas, bet i ji galime kreiptis kad suzinoti paduodamus elementus, argumentu 'masyvo' ilgi
 // }
 // printParam (3, false);
 // printParam ('a', 5, 'b', true, 3.14);
-///////////////////
+// /////////////////
 // Array.isArray(m)
 // - grazina true jeigu yra masyvas,  false jeigu objektas, funkcija, kintamasis ar kita
 // var m1= {
@@ -195,14 +196,14 @@
 // console.log(m1[savybe]);
 // savybe='g';
 // console.log(m1[savybe]);
-////////////////////
+// //////////////////
 // for (var key in m1) {
 //   console.log(m1[key]);
 // }
 // su key - suksis tiek, kiek yra savybiu, kiekviena karta garazinamas sekancia. viska uz mus paskaiciuoja JS. nezino kiek kartu prasisuks, bet zinom kad kiekvienos iteracijos metu key tures nauja pavadinima
 // nera garantuota kad objekto savybes tame prasukime eis ta pacia tvarka, kaip yra uzrasytos, bet 99% tikimybe kad bus taip isdestytos.
-//masyvo elementai visada isdestyti fiksuota tvarka
-//objekto savybes - nezinome kokia tvarka
+// masyvo elementai visada isdestyti fiksuota tvarka
+// objekto savybes - nezinome kokia tvarka
 // do {
 //   var x;
 //   do {
@@ -231,7 +232,7 @@
 // }
 // while (x);
 // console.log('pabaiga');
-//////
+// ////
 // Rekursija - funkcijos kvietimo budas, kai funkcija kviecia pati save.
 // function liekana (dalinys, daliklis) {
 //   if (dalinys<daliklis) {
@@ -313,16 +314,16 @@
 // todel butina panaudoti funkcijos parametru path, kad skaiciuotu praeita kelia iki elemento/objekto .
 // jeigu tas pats objektas eina kelis kartus masyve/objekte - reikia padaryti ir path.pop() gale bloko kur apdorojamas input type Object.
 // tada neskaiciuos jo kaip circular, o kaip kita (sekanti) elementa
-//////////
+// ////////
 // console.log(a);
 // mes klaida kadangi kintamasis a nezinomas
 // console.log(a);
 // var a=5;
 // console.log(a);
-//meta pradziai Undefined, paskui 5
+// meta pradziai Undefined, paskui 5
 // JS mechanisma hoisting - perkelti
 // veikimo principas - perbega per visas eilutes ir ziuri ar yra toks var
-//tas pats su funkcijoms - kvieciam funkcija, o funkcija yra aprasyta toliau
+// tas pats su funkcijoms - kvieciam funkcija, o funkcija yra aprasyta toliau
 // kai sitas mechanismas prabega - ir susikuria iskart atmintyje, bet be reiksmes, tik kintamuosius/funkcijas. todel meta undefined pirmoj eilutej
 // VAR - operatorius, aprasantis kintamaji
 // JS turi dar kitus op., kuriu pagalba galima aprasyt kintamuosius - LET, CONST
@@ -331,14 +332,14 @@
 // console.log(a);
 // siu atveju nesuveiks, nes operatorius LET nera hoistinamas
 // kintamasis susikuria tik tada, kai yra kvieciamas LET. siuo atveju grynai step-by-step veikia programa
-//////////
+// ////////
 // let a=5;
 // console.log(a);
 // const A=10;
 // console.log(A);
 // A=15;
 // meta mano.js:339 Uncaught TypeError: Assignment to constant variable. - constantos pakeisti neleidzia
-////////
+// //////
 // const O={
 //   p1:'testas',
 //   p2:10
@@ -349,7 +350,7 @@
 // console.log(O);
 // constanta siuo atveju yra nuoroda to objekto. o viduj galim keist ka norim elementus keist pridet atimt
 // CONST ir LET ner hoistinami. atsiranda atminty tik tuo momentu kai realiai yra ivykdydami
-///////
+// /////
 // function test (){
 //   var a=10;
 //   a=a+10;
@@ -357,8 +358,8 @@
 // }
 // console.log(a);
 // test ();
-/// meta a not defined klaida, nes hoistinimas vyksta velesneje vietoje- tik kai susikuriamas test function
-///////
+// / meta a not defined klaida, nes hoistinimas vyksta velesneje vietoje- tik kai susikuriamas test function
+// /////
 // function test(){
 //   var a=10;
 //   a=a+10;
@@ -374,7 +375,7 @@
 // grazina 50
 // console.log(inner());
 // inner iskvietimas nesuveikia, kadangi hoistingas suveikia tik tai tame lygyje (scope) kur esame dabar, o ten tik vienas kintamasis - funkcija test()
-/////////////////////
+// ///////////////////
 // panagrinesim cikla FOR. nera toks paprastas kaip atrodo. bjauresnis negu isivaizduojat
 // for (var i = 0; i < 3; i++) {
 //   console.log(i);
@@ -439,39 +440,39 @@
 //   console.log('nelygu');
 // }
 // nelygu duoda. tryguba lygybe nurodo nenaudoti autokonversija
-if (true!==1) {
-  console.log('lygu');
-} else {
-  console.log('nelygu');
-}
+// if (true!==1) {
+//   console.log('lygu');
+// } else {
+//   console.log('nelygu');
+// }
 // !== reiskia 'nelygu be tipu konvesijos' === reiskia 'lygu be tipu konvesrijos'
-////////
+// //////
 // switch
-var a;
-
-if (a===1) {
-
-} else if (a===2) {
-
-} else if (a===3) {
-
-} else {
-
-}
+// var a;
+//
+// if (a===1) {
+//
+// } else if (a===2) {
+//
+// } else if (a===3) {
+//
+// } else {
+//
+// }
 // pasirinkimu konstrukcija - priklausomai nuo a reiksmes
-switch (a) {
-  case 1:
-
-    break;
-  case 2:
-
-    break;
-  case 3:
-
-    break;
-  default:
-
-}
+// switch (a) {
+//   case 1:
+//
+//     break;
+//   case 2:
+//
+//     break;
+//   case 3:
+//
+//     break;
+//   default:
+//
+// }
 // ta pati konstrukcija su switch. 1 2 ir 3 yra nurodomos reiksmes kam turi buti lygus a. konkretus palyginimas.
 // su else if'u - lansktesnis variantas, daugiau galima salygu tprirasyti ir pns.
 // switch retai naudojamas, bent jau realiuose situacijose. labiau specifiskai pritaikomas tam tikriem atvejam
