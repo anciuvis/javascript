@@ -339,13 +339,70 @@
 // A=15;
 // meta mano.js:339 Uncaught TypeError: Assignment to constant variable. - constantos pakeisti neleidzia
 ////////
-const O={
-  p1:'testas',
-  p2:10
-};
-console.log(O);
-O.p1='kitas';
-O.p3=false;
-console.log(O);
+// const O={
+//   p1:'testas',
+//   p2:10
+// };
+// console.log(O);
+// O.p1='kitas';
+// O.p3=false;
+// console.log(O);
 // constanta siuo atveju yra nuoroda to objekto. o viduj galim keist ka norim elementus keist pridet atimt
 // CONST ir LET ner hoistinami. atsiranda atminty tik tuo momentu kai realiai yra ivykdydami
+///////
+// function test (){
+//   var a=10;
+//   a=a+10;
+//   return a;
+// }
+// console.log(a);
+// test ();
+/// meta a not defined klaida, nes hoistinimas vyksta velesneje vietoje- tik kai susikuriamas test function
+///////
+// function test(){
+//   var a=10;
+//   a=a+10;
+//   function inner(){
+//     b=10;
+//     var b=b+a;
+//     return b;
+//   }
+//   a=a+inner();
+//   return a;
+// }
+// console.log(test());
+// grazina 50
+// console.log(inner());
+// inner iskvietimas nesuveikia, kadangi hoistingas suveikia tik tai tame lygyje (scope) kur esame dabar, o ten tik vienas kintamasis - funkcija test()
+/////////////////////
+// panagrinesim cikla FOR. nera toks paprastas kaip atrodo. bjauresnis negu isivaizduojat
+// for (var i = 0; i < 3; i++) {
+//   console.log(i);
+// }
+// console.log(i);
+// // duoda 0 1 2 3 resultata
+// for (let j = 0; j < 3; j++) {
+//   console.log(j);
+// }
+// console.log(j);
+// duoda klaida. skirtumas - hoistinge VAR ir LET operatoriu
+// var i - suveikia hoist - atsiranda vieta atmintyje sitam kintamajam
+// su let - suveikia tam pacaim bloke, t.y. jygyje
+// kievienas curly bracket atidaryams - scope sudarymas atskiras.
+// uzsidarom - numire scope'as
+// scope, aprasydamas kintamaji as pslepiu didesniam scope tokiu pat vardu aprasyta kintamaji
+// for (var i = 0; i < 3; i++) {
+//   console.log(i);
+// }
+// console.log(i);
+// duoda 0 1 2 3 resultata
+// ankstesnese versijose cia butu 0 100 1 100 2 100, bet dabar JS apsaugo nuo nesamoniu paduodamus
+// var i=0;
+// function test() {
+//   console.log(i);
+//   var i=100;
+//   console.log(i);
+// }
+// test ();
+// JS nebeleidzia su LET, anksciau duodavo pirmu atveju/iskvietimu - is isorinio scope'o paima reiksme. po LET=100 imtu is vidinio scope.
+// su VAR duoda undefined ir 100
