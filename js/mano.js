@@ -406,3 +406,72 @@
 // test ();
 // JS nebeleidzia su LET, anksciau duodavo pirmu atveju/iskvietimu - is isorinio scope'o paima reiksme. po LET=100 imtu is vidinio scope.
 // su VAR duoda undefined ir 100
+// var - apsika atminti. let - sutaupo vietoj atmintyje - pasinaudoji ir ismeti nafik
+// for (var i = 0; i < 3; i++) {
+// }
+// console.log(i);
+// jei sitoj vietoj netycia isviesim i, dus reiksme 3, uzims laika kol surasiu is kur tas trejetas
+// for (let i = 0; i < 3; i++) {
+// }
+// console.log(i);
+// su LET duos klaida pabadzius iskvieti i, nes tame scope jo nera
+// if (1=='1') {
+//   console.log('lygu');
+// } else {
+//   console.log('nelygu');
+// }
+// suveikia, nors skaiciu lyginame su stringu. suveikia autokonvertacija
+// if (1==='1') {
+//   console.log('lygu');
+// } else {
+//   console.log('nelygu');
+// }
+// nesuveikia autokonvertacija
+// if (true==1) {
+//   console.log('lygu');
+// } else {
+//   console.log('nelygu');
+// }
+// bus lygu, nes true paverciamas i skaiciu 1 su standartine autokonversija
+// if (true===1) {
+//   console.log('lygu');
+// } else {
+//   console.log('nelygu');
+// }
+// nelygu duoda. tryguba lygybe nurodo nenaudoti autokonversija
+if (true!==1) {
+  console.log('lygu');
+} else {
+  console.log('nelygu');
+}
+// !== reiskia 'nelygu be tipu konvesijos' === reiskia 'lygu be tipu konvesrijos'
+////////
+// switch
+var a;
+
+if (a===1) {
+
+} else if (a===2) {
+
+} else if (a===3) {
+
+} else {
+
+}
+// pasirinkimu konstrukcija - priklausomai nuo a reiksmes
+switch (a) {
+  case 1:
+
+    break;
+  case 2:
+
+    break;
+  case 3:
+
+    break;
+  default:
+
+}
+// ta pati konstrukcija su switch. 1 2 ir 3 yra nurodomos reiksmes kam turi buti lygus a. konkretus palyginimas.
+// su else if'u - lansktesnis variantas, daugiau galima salygu tprirasyti ir pns.
+// switch retai naudojamas, bent jau realiuose situacijose. labiau specifiskai pritaikomas tam tikriem atvejam
