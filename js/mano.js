@@ -476,3 +476,15 @@
 // ta pati konstrukcija su switch. 1 2 ir 3 yra nurodomos reiksmes kam turi buti lygus a. konkretus palyginimas.
 // su else if'u - lansktesnis variantas, daugiau galima salygu tprirasyti ir pns.
 // switch retai naudojamas, bent jau realiuose situacijose. labiau specifiskai pritaikomas tam tikriem atvejam
+//
+// JSON
+// automatiskai pavercia i Objekta visa i stringa - stringify()
+// arba is stringo padaro objekta - parse (). jeigu stringas teisingai surasytas su kabutemis
+let O={
+  p1:'testas',
+  p2:true
+};
+console.log(JSON.stringify(O));
+let s='{"p1":"test","p2":true}'; // typeof s - string
+let O1=JSON.parse(s); // typeof O1 - Objektas
+console.log(O1);
