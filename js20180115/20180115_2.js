@@ -51,7 +51,7 @@ function start() {
 			d.daugyba = i+'x'+j;
 			d.addEventListener('mouseover', detailsOn);
 			d.addEventListener('mouseleave', detailsOff);
-			d.appendChild(document.createTextNode(i*j));
+			d.appendChild(document.createTextNode(i*j)); // tas pats cia butu d.innerHTML=i*j;
 			r.appendChild(d);
 		}
 		t.appendChild(r);
