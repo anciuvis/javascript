@@ -8,6 +8,11 @@ function onClickButton() {
 	rectangle.classList.toggle('hide');
 }
 
+function onMouseOverRectangle() {
+	// The .add() method will add the class.
+	rectangle.classList.add('important');
+}
+
 function onDoubleClickRectangle() {
 	// The .toggle() method will add or remove a class(like a switch).
 	rectangle.classList.toggle('good');
@@ -17,11 +22,6 @@ function onMouseOutRectangle() {
 	// The.remove() methode will erase the class.
 	rectangle.classList.remove('good');
 	rectangle.classList.remove('important');
-}
-
-function onMouseOverRectangle() {
-	// The .add() method will add the class.
-	rectangle.classList.add('important');
 }
 /* ******************************** MAIN CODE **********************************/
 // Looks for the button and the rectangle in the DOM tree.

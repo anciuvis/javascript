@@ -1,31 +1,26 @@
-body
-{
-    margin: 0 auto;
-    width: 90%;
+body {
+	margin: 0 auto;
+	width: 90%;
 }
 
-
-.hide
-{
-    display: none;
+.hide {
+	display: none;
 }
 
-.rectangle
-{
-    /* structure */
-    height: 300px;
-    width: 400px;
+.rectangle {
+	/* structure */
+	height: 300px;
+	width: 400px;
+	/* presentation */
+	background-color: royalblue;
+	border-radius: 8px;
+	transition: background-color 0.8s;
+}
 
-    /* presentation */
-    background-color: royalblue;
-    border-radius: 8px;
-    transition: background-color 0.8s;
+.rectangle.good {
+	background-color: limegreen;
 }
-.rectangle.good
-{
-    background-color: limegreen;
-}
-.rectangle.important
-{
-    background-color: firebrick;
+
+.rectangle.important {
+background-color: firebrick;
 }
