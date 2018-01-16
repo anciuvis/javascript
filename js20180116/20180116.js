@@ -24,3 +24,33 @@ function mouseOut() {
 	clearTimeout(myVar);
 	}
 }
+//
+
+var pause = document.getElementById('toggle-pause');
+var start = document.getElementById('start');
+var reset = document.getElementById('reset');
+var faster = document.getElementById('faster');
+var slower = document.getElementById('slower');
+var clock = document.getElementById('clock');
+var myVar = setInterval(clickStart, 1000);
+
+pause.addEventListener('click', clickPause);
+start.addEventListener('click', clickStart);
+// reset.addEventListener('click', clickReset);
+// faster.addEventListener('click', clickFaster);
+// slower.addEventListener('click', clickSlower);
+
+function clickPause() {
+	if (pause.innerHTML == 'pause') {
+		pause.innerHTML = 'continue';
+	} else if (pause.innerHTML == 'continue') {
+		pause.innerHTML = 'pause';
+	} else {
+		pause.innerHTML = 'continue';
+	}
+}
+
+function clickStart() {
+	var d = new Date();
+	clock.innerHTML = d.toLocaleTimeString();
+}
