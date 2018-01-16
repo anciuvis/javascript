@@ -52,10 +52,8 @@ function clickPause() {
 	}
 	if (pause.innerHTML == 'pause') {
 		pause.innerHTML = 'continue';
-	} else if (pause.innerHTML == 'continue') {
-		pause.innerHTML = 'pause';
 	} else {
-		pause.innerHTML = 'continue';
+		pause.innerHTML = 'pause';
 	}
 }
 
@@ -66,8 +64,9 @@ function clickStart() {
 	pause.innerHTML = 'pause';
 }
 
-function chrono(){
-	sec.innerHTML++
+function chrono() {
+	console.log('tick');
+	sec.innerHTML++;
 	if (sec.innerHTML > 59){
 		sec.innerHTML = 0;
 		min.innerHTML++;
@@ -100,7 +99,7 @@ function clickSlower() {
 }
 
 function clickReset() {
-	if (myFun) {
+		if (myFun) {
 		clearInterval(myFun);
 		myFun = null;
 	}
@@ -109,4 +108,5 @@ function clickReset() {
 	hrs.innerHTML = 0;
 	pause.innerHTML = 'pause';
 	speed = 1000;
+	console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
