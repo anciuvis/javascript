@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JavaScript20180116</title>
+	</head>
+	<body>
+		<form action="http://google.lt/send_form.php" method="POST">
+			<p class="form-text">Registration form</p>
+			<div>
+				<label for="user">Username</label><input id="user" type="text" name="user" placeholder="Required, 5-12 characters" />
+			</div>
+			<div>
+				<label for="pass">Password</label><input id="pass" type="text" name="pass" placeholder="Required, 7-12 characters" />
+			</div>
+			<div>
+				<label for="name">Name</label><input id="name" type="text" name="name" placeholder="Required, letters only" />
+			</div>
+			<div>
+				<label for="address">Address</label><input id="address" type="text" name="address" placeholder="Optional" />
+			</div>
+			<div>
+				<label for="country">Country</label>
+				<select id="country" class="container" name="country">
+					<option value="" disabled selected hidden>Required</option>
+					<option>Lithuania</option>
+					<option>Zimbabwe</option>
+					<option>Estonia</option>
+					<option>Latvia</option>
+				</select>
+			</div>
+			<div>
+				<label for="zip">ZIP code</label><input id="zip" type="numbers" name="zip" placeholder="Numbers only" />
+			</div>
+			<label for="email">Email</label><input id="email" type="text" name="email" placeholder="Required, valid emails only" />
+			<div>
+				<span>Sex</span>
+				<input type="radio" id="sex-f" name="sex" /><label for="sex-f">Female</label>
+				<input type="radio" id="sex-m" name="sex" /><label for="sex-m">Male</label>
+				<span>Required</span>
+			</div>
+			<div>
+				<span>Language</span>
+				<input type="checkbox" id="lang-en" name="language" /><label for="lang-en">English</label>
+				<input type="checkbox" id="lang-other" name="other" /><label for="lang-other">Other</label>
+				<span>Required</span>
+			</div>
+			<div>
+				<label for="about">About</label>
+				<textarea id="about" name="about" placeholder="Optional"></textarea>
+			</div>
+			<div>
+				<button id="submit" type="submit" name="btn-submit">Send</button>
+				<button id="reset" type="reset" name="btn-reset">Reset</button>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="20180116-2.js"></script>
+</html>

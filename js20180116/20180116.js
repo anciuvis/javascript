@@ -1,29 +1,29 @@
 // innerHTML - iraso i tago viduri teksta, kuris bus skaitomas kaip HTML kodas, tai realiai galima viduj prikurti puslapio
-let d = document.getElementById('mdiv');
-console.log(d.innerHTML);
-d.innerHTML = 'blabla <p id="pid">bla</p>!';
-let p = document.getElementById('pid');
-console.log(p);
-// document.write - prideda i gala teksta, todel sunkiau valdyti kur jis atsidurs, vengti naudoti realiai
-// setTimeout- jeigu noriu kad pradetu vykdyti funkcija po kazkiek laiko, pvz 200ms delay. su salyga kad pele buvouzvaziuota ant paveikslelio pvz.
-// funkcija setTimeout grazina
-var myVar = null;
-function mouseIn() {
-	document.getElementById('status').innerHTML = 'pele uzvaziavo';
-	myVar = setTimeout(mouseSleep, 500);
-}
-
-function mouseSleep() {
-	document.getElementById('status').innerHTML = 'pele uzmigo';
-	myVar = null;
-}
-
-function mouseOut() {
-	document.getElementById('status').innerHTML = 'pele isvaziavo';
-	if (myVar) {
-	clearTimeout(myVar);
-	}
-}
+// let d = document.getElementById('mdiv');
+// console.log(d.innerHTML);
+// d.innerHTML = 'blabla <p id="pid">bla</p>!';
+// let p = document.getElementById('pid');
+// console.log(p);
+// // document.write - prideda i gala teksta, todel sunkiau valdyti kur jis atsidurs, vengti naudoti realiai
+// // setTimeout- jeigu noriu kad pradetu vykdyti funkcija po kazkiek laiko, pvz 200ms delay. su salyga kad pele buvouzvaziuota ant paveikslelio pvz.
+// // funkcija setTimeout grazina
+// var myVar = null;
+// function mouseIn() {
+// 	document.getElementById('status').innerHTML = 'pele uzvaziavo';
+// 	myVar = setTimeout(mouseSleep, 500);
+// }
+//
+// function mouseSleep() {
+// 	document.getElementById('status').innerHTML = 'pele uzmigo';
+// 	myVar = null;
+// }
+//
+// function mouseOut() {
+// 	document.getElementById('status').innerHTML = 'pele isvaziavo';
+// 	if (myVar) {
+// 	clearTimeout(myVar);
+// 	}
+// }
 //
 
 let start = document.getElementById('start');
@@ -66,15 +66,27 @@ function clickStart() {
 
 function chrono() {
 	console.log('tick');
-	sec.innerHTML++;
-	if (sec.innerHTML > 59){
-		sec.innerHTML = 0;
-		min.innerHTML++;
-		if (min.innerHTML > 59) {
-			min.innerHTML = 0;
-			hrs.innerHTML++;
-			if (hrs.innerHTML > 23) {
-				hrs.innerHTML = 0;
+	let s = sec.innerHTML;
+	s++;
+	let str = "00" + s;
+	str = str.substring(str.length - 2);
+	sec.innerHTML = str;
+	if (s > 59) {
+		sec.innerHTML = "00";
+		let m = min.innerHTML;
+		m++;
+		str = "00" + m;
+		str = str.substring(str.length - 2);
+		min.innerHTML = str;
+		if (m > 59) {
+			min.innerHTML = "00";
+			let h = hrs.innerHTML;
+			h++;
+			str = "00" + h;
+			str = str.substring(str.length - 2);
+			hrs.innerHTML = str;
+			if (h > 23) {
+				hrs.innerHTML = "00";
 			}
 		}
 	}
