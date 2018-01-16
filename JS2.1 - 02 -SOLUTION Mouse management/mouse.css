@@ -17,10 +17,10 @@ body {
 	transition: background-color 0.8s;
 }
 
-.rectangle.good {
-	background-color: limegreen;
-}
-
 .rectangle.important {
 background-color: firebrick;
+}
+
+.rectangle.good {
+	background-color: limegreen;
 }

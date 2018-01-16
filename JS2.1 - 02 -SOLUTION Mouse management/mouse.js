@@ -1,5 +1,5 @@
 'use strict';   // JavaScript strict mode
-*************************** DATA *************************************/
+/* *************************** DATA *************************************/
 var button;
 var rectangle;
 /* ********************************** METHODS ********************************/
@@ -13,15 +13,15 @@ function onMouseOverRectangle() {
 	rectangle.classList.add('important');
 }
 
-function onDoubleClickRectangle() {
-	// The .toggle() method will add or remove a class(like a switch).
-	rectangle.classList.toggle('good');
-}
-
 function onMouseOutRectangle() {
 	// The.remove() methode will erase the class.
 	rectangle.classList.remove('good');
 	rectangle.classList.remove('important');
+}
+
+function onDoubleClickRectangle() {
+	// The .toggle() method will add or remove a class(like a switch).
+	rectangle.classList.toggle('good');
 }
 /* ******************************** MAIN CODE **********************************/
 // Looks for the button and the rectangle in the DOM tree.
