@@ -6,24 +6,21 @@ function validateForm() {
 	console.log(user);
 	var pass = document.forms["myForm"]["pass"].value;
 	console.log(pass);
-	// var names = document.forms["myForm"]["names"].value;
-	// console.log(name);
-	// var address = document.forms["myForm"]["address"].value;
-	// console.log(address);
-	// var country = document.forms["myForm"]["country"].value;
-	// console.log(country);
-	// var zip = document.forms["myForm"]["zip"].value;
-	// console.log(zip);
-	// var email = document.forms["myForm"]["email"].value;
-	// console.log(email);
-	// var sex = document.forms["myForm"]["sex"].value;
-	// console.log(sex);
-	// var langEn = document.forms["myForm"]["langEn"].value;
-	// console.log(langEn);
-	// var langOth = document.forms["myForm"]["langOth"].value;
-	// console.log(langOth);
-	// var about = document.forms["myForm"]["about"].value;
-	// console.log(about);
+	var names = document.forms["myForm"]["names"].value;
+	console.log(names);
+	var country = document.forms["myForm"]["country"].value;
+	console.log(country);
+	var zip = document.forms["myForm"]["zip"].value;
+	console.log(zip);
+	var email = document.forms["myForm"]["email"].value;
+	console.log(email);
+	var sex = document.forms["myForm"]["sex"].value;
+	console.log(sex);
+	var langEn = document.getElementById('langEn');
+	console.log(langEn);
+	var langOther = document.getElementById('langOther');
+	console.log(langOther);
+
 
 	// 	if (user == ""||pass == ""||name == ""||country == ""||email == ""||sex == "") {
 	// 		alert(notAllow);
@@ -34,35 +31,38 @@ function validateForm() {
 
 	// USERNAME VALIDATION
 	if (user.length<5||user.length>12) {
-		alert('username length not right');
 		console.log('username ilgis blogas');
+		alert('username length not right');
 		return;
 	}
 	console.log('username ilgis geras');
 
 	let rLett = /[A-Za-z]/;
+	let rLetOnly = /^[a-z][a-z\s]*$/i;
 	let rDig = /\d/;
+	let rDigOnly = /^[0-9][0-9]*$/;
 	let rSpec = /[!.,;?[\]{}/\\*(-)-+_#@&$|'\"><^`~=]/;
+	let rEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	if (rLett.test(user)) {
 		console.log('raides username yra');
 	} else {
-		alert('username must contain letters');
 		console.log('raidziu username nera');
+		alert('username must contain letters');
 		return;
 	}
 
 	if (rDig.test(user)) {
 		console.log('skaicius username yra');
 	} else {
-		alert('username must contain number');
 		console.log('skaiciaus username nera');
+		alert('username must contain number');
 		return;
 	}
 
 	if (rSpec.test(user)) {
-		alert('username cannot contain special symbols');
 		console.log('username yra special symbols');
+		alert('username cannot contain special symbols');
 		return;
 	} else {
 		console.log('username nera spec.simboliu');
@@ -94,8 +94,8 @@ function validateForm() {
 
 	// PASSWORD VALIDATION
 	if (pass.length<7||pass.length>12) {
-		alert('password length not right');
 		console.log('passo ilgis blogas');
+		alert('password length not right');
 		return;
 	}
 	console.log('passo ilgis geras');
@@ -103,27 +103,101 @@ function validateForm() {
 	if (rLett.test(pass)) {
 		console.log('raides passworde yra');
 	} else {
-		alert('password must contain letters');
 		console.log('raidziu passworde nera');
+		alert('password must contain letters');
 		return;
 	}
 
 	if (rDig.test(pass)) {
 		console.log('skaicius passworde yra');
 	} else {
-		alert('password must contain number');
 		console.log('skaiciaus passworde nera');
+		alert('password must contain number');
 		return;
 	}
 
 	if (rSpec.test(pass)) {
 		console.log('spec.simbolis passworde yra');
 	} else {
-		alert('password must contain special symbol');
 		console.log('spec.simboliaus passworde nera');
+		alert('password must contain special symbol');
 		return;
 	}
 
+	// NAME VALIDATION
+	if (names.length<1||names.length>56) {
+		console.log('name ilgis blogas');
+		alert('name length not right');
+		return;
+	}
+	console.log('name ilgis geras');
+
+	if (rLetOnly.test(names)) {
+		console.log('raides name yra');
+	} else {
+		console.log('raidziu name nera');
+		alert('name must contain letters only');
+		return;
+	}
+
+	//COUNTRY VALIDATION
+	if (country === "") {
+		console.log('country nera pasirinktas');
+		alert('country must be selected');
+		return;
+	}
+	console.log('country yra');
+
+	// ZIP VALIDATION
+	if (zip.length<4||zip.length>8) {
+		console.log('zip ilgis blogas');
+		alert('zip length not right');
+		return;
+	}
+	console.log('zip ilgis geras');
+
+	if (rDigOnly.test(zip)) {
+		console.log('zipe yra skaiciai');
+	} else {
+		console.log('zipe nera skaiciai');
+		alert('zip must contain numbers only');
+		return;
+	}
+
+	// EMAIL VALIDATION
+	if (rEmail.test(email)) {
+		console.log('email geras');
+	} else {
+		console.log('email blogas');
+		alert('email is not correct');
+		return;
+	}
+
+	// SEX VALIDATION
+	if (sex === "") {
+		console.log('lytis nera pasirinkta');
+		alert('sex must be selected');
+		return;
+	}
+	console.log('lytis yra');
+
+	// LANGUAGE VALIDATION
+	// let l = false;
+	// if (langEn.checked) {
+	// 	l = true;
+	// 	console.log('EN language yra');
+	// }
+	// if (langOth.checked) {
+	// 	l = true;
+	// 	console.log('Other language yra');
+	// }
+
+	if (!(langEn.checked || langOth.checked)) {
+		console.log('nera kalbos');
+		alert('atlest one languege must be selected');
+		return;
+	}
+	console.log('viskas ok');
 }
 		// if (pass[i] === "!"||pass[i] === "."||pass[i] === ","||pass[i] === ";"||pass[i] === "?"||pass[i] === "["||pass[i] === "]"||pass[i] === "{"||pass[i] === "}"||pass[i] === "/"||pass[i] === "\\"||pass[i] === "*") {
 		// kad neaprasineti ilgos salygos kaip apacioj, padarom masyva is spec.simboliu
