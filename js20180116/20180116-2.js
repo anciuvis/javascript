@@ -85,20 +85,29 @@ let r2 = /\d+/;
 let r3 = new RegExp ('[a-q]*','i'); // tas pats kaip r4
 let r4 = /[a-q]*/i;
 
-let s = 'ABC3DGH';
+let s = 'ABC3DGc';
 r2 = /\d/; // situo atveju galima rasyti ir \d+ ir \d tiesiog
 if (r2.test(s)) {
 	console.log('skaicius yra');
 } else {
-	console.log('nera');
+	console.log('skaiciaus nera');
 }
 
 r2 = /^[aA].*[cC]$/; // kad prasideda a arba A ir baigiasi c arba C, tarp ju nesvarbu skaicius, .* reiskia kad salyga gali kartotis arba nuli arba n kartu (t.y. neprivaloma kad kartotusi isvis)
 // r2 = /^[a].*[c]$/i; - tas pats, i pasako kad tinka mazosios ir didziosios
 if (r2.test(s)) {
-	console.log('skaicius yra');
+	console.log('salyga yra');
 } else {
-	console.log('nera');
+	console.log('salygos nera');
+}
+
+s = 'apple is red and tasty';
+console.log(s);
+r2 = /(red)|(yellow)/; // surasti kad yra 'red' arba 'yellow'
+if (r2.test(s)) {
+	console.log('red/yellow yra');
+} else {
+	console.log('red/yellow nera');
 }
 
 // 	if (user == ""||pass == ""||name == ""||country == ""||email == ""||sex == "") {
