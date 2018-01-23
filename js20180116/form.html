@@ -6,65 +6,67 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	<body>
-		<form name="myForm" onsubmit="return validateForm()" method="post" style="text-align:right;">
-			<div class="row">
-				<h1 class="col-md-2">Registration form</h1>
-			</div>
-			<div class="row">
-				<label for="user" class="col-md-1">Username</label><input id="user" class="col-md-2" type="text" name="user" placeholder="Required, 5-12 characters" />
-			</div>
-			<div class="row">
-				<label for="pass" class="col-md-1">Password</label><input id="pass" class="col-md-2" type="text" name="pass" placeholder="Required, 7-12 characters" />
-			</div>
-			<div class="row">
-				<label for="name" class="col-md-1">Name</label><input id="name" class="col-md-2" type="text" name="name" placeholder="Required, letters only" />
-			</div>
-			<div class="row">
-				<label for="address" class="col-md-1">Address</label><input id="address" class="col-md-2" type="text" name="address" placeholder="Optional" />
-			</div>
-			<div class="row">
-				<label for="country" class="col-md-1">Country</label>
-				<select id="country" class="col-md-2" name="country">
-					<option value="" disabled selected hidden>Required</option>
-					<option>Lithuania</option>
-					<option>Zimbabwe</option>
-					<option>Estonia</option>
-					<option>Latvia</option>
-				</select>
-			</div>
-			<div class="row">
-				<label for="zip" class="col-md-1">ZIP code</label><input id="zip" class="col-md-2" type="numbers" name="zip" placeholder="Numbers only" />
-			</div>
-			<div class="row">
-			<label for="email" class="col-md-1">Email</label><input id="email" class="col-md-2" type="text" name="email" placeholder="Required, valid emails only" />
-			</div>
-			<div class="row">
-				<span class="col-md-1" style="font-weight:bold">Sex</span>
-				<div class="col-md-2" style="margin:0 auto;">
-					<input type="radio" id="sex-f" name="sex" /><label for="sex-f">Female</label>
-					<input type="radio" id="sex-m" name="sex" /><label for="sex-m">Male</label>
+		<div class="container">
+			<form name="myForm" style="text-align:right;">
+				<div class="row">
+					<h1 class="col-md-4">Registration form</h1>
 				</div>
-				<span class="col-md-1" style="text-align:left;">Required</span>
-			</div>
-			<div class="row">
-				<span class="col-md-1" style="font-weight:bold">Language</span>
-				<div class="col-md-2">
-					<input type="checkbox" id="lang-en" name="language" /><label for="lang-en">English</label>
-					<input type="checkbox" id="lang-other" name="other" /><label for="lang-other">Other</label>
+				<div class="row">
+					<label for="user" class="col-md-1">Username</label><input id="user" class="col-md-3" type="text" name="user" placeholder="Required, 5-12 characters" />
 				</div>
-				<span class="col-md-1" style="text-align:left">Required</span>
-			</div>
-			<div class="row">
-				<label for="about" class="col-md-1">About</label>
-				<textarea id="about" class="col-md-2" name="about" placeholder="Optional"></textarea>
-			</div>
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-2">
-				<button id="submit" name="btn-submit">Submit</button>
-				<button id="reset" type="reset" name="btn-reset">Reset</button>
-			</div>
-		</form>
+				<div class="row">
+					<label for="pass" class="col-md-1">Password</label><input id="pass" class="col-md-3" type="text" name="pass" placeholder="Required, 7-12 characters" />
+				</div>
+				<div class="row">
+					<label for="name" class="col-md-1">Name</label><input id="names" class="col-md-3" type="text" name="names" placeholder="Required, letters only" />
+				</div>
+				<div class="row">
+					<label for="address" class="col-md-1">Address</label><input id="address" class="col-md-3" type="text" name="address" placeholder="Optional" />
+				</div>
+				<div class="row">
+					<label for="country" class="col-md-1">Country</label>
+					<select id="country" class="col-md-3" name="country">
+						<option value="" disabled selected hidden>Required</option>
+						<option>Lithuania</option>
+						<option>Zimbabwe</option>
+						<option>Estonia</option>
+						<option>Latvia</option>
+					</select>
+				</div>
+				<div class="row">
+					<label for="zip" class="col-md-1">ZIP code</label><input id="zip" class="col-md-3" type="numbers" name="zip" placeholder="Numbers only" />
+				</div>
+				<div class="row">
+					<label for="email" class="col-md-1">Email</label><input id="email" class="col-md-3" type="text" name="email" placeholder="Required, valid emails only" />
+				</div>
+				<div class="row">
+					<span class="col-md-1" style="font-weight:bold">Sex</span>
+					<div class="col-md-3" style="margin:0 auto;">
+						<input type="radio" id="sexF" name="sex" value="female"/><label for="sexF">Female</label>
+						<input type="radio" id="sexM" name="sex" value="male"/><label for="sexM">Male</label>
+					</div>
+					<span class="col-md-1" style="text-align:left;">Required</span>
+				</div>
+				<div class="row">
+					<span class="col-md-1" style="font-weight:bold">Language</span>
+					<div class="col-md-3">
+						<input type="checkbox" id="langEn" name="langEn" /><label for="langEn">English</label>
+						<input type="checkbox" id="langOth" name="langOth" /><label for="langOth">Other</label>
+					</div>
+					<span class="col-md-1" style="text-align:left">Required</span>
+				</div>
+				<div class="row">
+					<label for="about" class="col-md-1">About</label>
+					<textarea id="about" class="col-md-3" name="about" placeholder="Optional"></textarea>
+				</div>
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-3">
+					<input id="btn" type="button" onclick="validateForm();" value="Submit"></button>
+					<button id="reset" type="reset" name="btn-reset">Reset</button>
+				</div>
+			</form>
+		</div>
 	</body>
 	<script type="text/javascript" src="20180116-2.js"></script>
 </html>
