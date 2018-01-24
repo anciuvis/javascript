@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Server jQuery</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<h1 class="col-md-4">Server form</h1>
+			</div>
+			<div class="buttons">
+				<input id="btn-list" type="button" name="list" value="List" onclick="testas();">
+				<input id="btn-new" type="button" name="new" value="New" onclick="show();">
+			</div>
+			<form name="serverForm" style="text-align:right;" class="hidden" action="index.html" method="post">
+				<div class="row">
+					<label for="user" class="col-md-1">Username </label><input id="user" class="col-md-3" type="text" name="user" placeholder="Username" />
+				</div>
+				<div class="row">
+					<label for="email" class="col-md-1">Email </label><input id="email" class="col-md-3" type="text" name="email" placeholder="Email" />
+				</div>
+				<div class="row">
+					<label for="age" class="col-md-1">Age </label><input id="age" class="col-md-3" type="numbers" name="age" placeholder="Age" />
+				</div>
+			</form>
+			<a href="http://jquery.com/">jQuery</a>
+		</div>
+		<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="script.js"></script>
+	</body>
+</html>
