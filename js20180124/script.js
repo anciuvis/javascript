@@ -106,28 +106,31 @@
 $( document ).ready(function() {
 	alert( 'welcome' ); // - testui
 
-	let myNewForm = $( '<form name="serverForm" style="text-align:right;" action="index.html" method="post"><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" placeholder="Username" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" placeholder="Email" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" placeholder="Age" /></div><div class="row"><input id="btn-post" class="col-md-2" type="button" name="post" value="post"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="cancel"></div></form>' );
+	let myNewForm = $( '<form name="serverForm" style="text-align:left;" action="index.html" method="post"><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" placeholder="Username" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" placeholder="Email" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" placeholder="Age" /></div><div class="row"><input id="btn-post" class="col-md-2" type="button" name="post" value="post"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="cancel"></div></form>' );
+
+	let myList = $( '<div class="row"><div class="col-md-1">id</div><div class="col-md-1">username</div><div class="col-md-1">email</div><div class="col-md-1">age</div><input id="btn-upd" type="button" name="update" value="Update"><input id="btn-del" type="button" name="delete" value="Delete"></div>' );
 
 	$( '#btn-new' ).click(function() {
 		// $( 'form' ).toggleClass( 'hidden' ); - senas variantas
 		alert('veikia formos sukurimas')
 		$( '#forma' ).append(myNewForm);
+		$( 'form' ).removeClass( 'hidden' );
 		$( "#btn-post" ).click(function () {
 			alert("veikia postas");
 			let user = document.forms["serverForm"]["user"].value;
-			console.log(user);
+			// console.log(user);
 			let email = document.forms["serverForm"]["email"].value;
-			console.log(email);
+			// console.log(email);
 			let uAge = document.forms["serverForm"]["age"].value;
-			console.log(uAge);
+			// console.log(uAge);
 			let form = {
 				userName: user,
 				eMail: email,
 				age: parseInt(uAge)
 			};
-			console.log(form);
+			// console.log(form);
 			let userEntry = JSON.stringify(form);
-			console.log(userEntry);
+			// console.log(userEntry);
 			$.ajax({
 				url:'http://192.168.1.81:8080/add',
 				data: userEntry,
@@ -139,20 +142,41 @@ $( document ).ready(function() {
 				}
 			});
 		});
-		$( "#btn-cancel" ).click(function () {
+		$( '#btn-cancel' ).click(function () {
 			alert("veikia cancel");
-			$( 'form' ).toggleClass( 'hidden' );
+			$( 'form' ).addClass( 'hidden' );
 		});
 	});
 
 	$( "#btn-list" ).click(function () {
 		alert('veikia listas');
+		$('#listLoad').html('');
 		$.ajax({
 			url:'http://192.168.1.81:8080/list',
 			type: 'GET',
-			success: function(data) {
-				console.log(data);
+			success: function(result) {
+				console.log(result);
+				var output="<table><thead><tr><th>id number</th><th>Username</th><th>eMail value</th><th>age value</th></tr></thead><tbody>";
+				for (var i in result) {
+					output+="<tr><td>" + result[i].id + "</td><td>" + result[i].userName  + "</td><td>" + result[i].eMail + "</td><td>" + result[i].age + "</td><td><input class='btn-upd' type='button' name='update' value='Update'></td><td><input class='btn-del' type='button' name='delete' value='Delete'></td></tr>";
+				}
+				output+="</tbody></table>";
+				$( '#listLoad' ).append(output);
 			}
+
+		});
+		// $( '#listLoad' ).append(myList);
+		$( '.btn-upd' ).click(function() {
+			$.ajax({
+				url:'http://192.168.1.81:8080/update',
+				data: XXXXXX,
+				contentType: 'application/json',
+				type: 'POST',
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+				}
+			});
 		});
 	});
 
