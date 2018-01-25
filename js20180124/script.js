@@ -105,6 +105,7 @@
 
 $( document ).ready(function() {
 	alert( 'welcome' ); // - testui
+	console.log('page ready, JS pasileidzia');
 
 	let myNewForm = $( '<form name="serverForm" style="text-align:left;" action="index.html" method="post"><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" placeholder="Username" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" placeholder="Email" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" placeholder="Age" /></div><div class="row"><input id="btn-post" class="col-md-2" type="button" name="post" value="post"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="cancel"></div></form>' );
 
@@ -115,6 +116,7 @@ $( document ).ready(function() {
 		alert('veikia formos sukurimas')
 		$( '#forma' ).append(myNewForm);
 		$( 'form' ).removeClass( 'hidden' );
+
 		$( "#btn-post" ).click(function () {
 			alert("veikia postas");
 			let user = document.forms["serverForm"]["user"].value;
@@ -128,6 +130,7 @@ $( document ).ready(function() {
 				eMail: email,
 				age: parseInt(uAge)
 			};
+
 			// console.log(form);
 			let userEntry = JSON.stringify(form);
 			// console.log(userEntry);
@@ -138,10 +141,12 @@ $( document ).ready(function() {
 				type: 'POST',
 				dataType: 'json',
 				success: function(data) {
-					console.log(data);
+					console.log(data)
+					console.log('posted data');;
 				}
 			});
 		});
+
 		$( '#btn-cancel' ).click(function () {
 			alert("veikia cancel");
 			$( 'form' ).addClass( 'hidden' );
