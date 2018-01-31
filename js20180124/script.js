@@ -29,7 +29,7 @@
 // 	}
 // 	console.log('suveikia class change');
 // }
-// ira toks pat su hiddem  klase:
+// yra toks pat su hiddem  klase:
 // function show () {
 // 	let list = document.getElementsByTagName('form');
 // 	for (var i = 0; i < list.length; i++) {
@@ -62,7 +62,7 @@
 // $( '.mygt' ).mouseover() { - ant visu klasiu mygtuku
 //	...
 // }
-// JSON - stringas, i kuri irasytas obketas pagal tam tikras taisykles - su curly bracketais, kablialiais, dvitaskiais
+// JSON - stringas, i kuri irasytas objektas pagal tam tikras taisykles - su curly bracketais, kablialiais, dvitaskiais
 // let o = {
 // 	id: 5,
 // 	vardas: 'jonas',
@@ -100,6 +100,8 @@
 // 	}
 // });
 
+
+
 // CIA PRADZIA NORMALI
 
 
@@ -107,10 +109,7 @@ $( document ).ready(function() {
 	alert( 'welcome' ); // - testui
 	console.log('page ready, JS pasileidzia');
 
-	let myNewForm = $( '<form name="serverForm" style="text-align:left;" action="index.html" method="post"><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" placeholder="Username" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" placeholder="Email" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" placeholder="Age" /></div><div class="row"><input id="btn-post" class="col-md-2" type="button" name="post" value="post"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="cancel"></div></form>' );
-
-	// let myList = $( '<div class="row"><div class="col-md-1">id</div><div class="col-md-1">username</div><div class="col-md-1">email</div><div class="col-md-1">age</div><input class="btn-upd" type="button" name="update" value="Update"><input class="btn-del" type="button" name="delete" value="Delete"></div>' );
-
+	let myNewForm = $( '<form name="serverForm" style="text-align:left;" action="index.html" method="post"><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" placeholder="Username" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" placeholder="Email" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" placeholder="Age" /></div><div class="row"><input id="btn-post" class="col-md-2" type="button" name="post" value="Post"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="Cancel"></div></form>' );
 
 	$( '#btn-new' ).click(function() {
 		// $( 'form' ).toggleClass( 'hidden' ); - senas variantas
@@ -120,11 +119,8 @@ $( document ).ready(function() {
 		$( "#btn-post" ).click(function () {
 			alert("veikia postas");
 			let user = document.forms["serverForm"]["user"].value;
-			// console.log(user);
 			let email = document.forms["serverForm"]["email"].value;
-			// console.log(email);
 			let uAge = document.forms["serverForm"]["age"].value;
-			// console.log(uAge);
 			let form = {
 				userName: user,
 				eMail: email,
@@ -154,35 +150,84 @@ $( document ).ready(function() {
 	});
 
 
-	$( '#btn-list' ).click( function list() {
+	$( '#btn-list' ).click( function () {
 		alert('veikia listas');
-		$('#listLoad').html('');
+		$( '#listLoad' ).html(''); // isvalo pradzioj paspaudimo visa lista, kad neappendintusi kiekviena karta naujas listas
 		$.ajax({
 			url:'http://192.168.1.81:8080/list',
 			type: 'GET',
 			success: function(result) {
 				console.log(result);
-				var output="<table><thead><tr><th>id number</th><th>Username</th><th>eMail value</th><th>age value</th></tr></thead><tbody>";
+				var output='<table><thead><tr><th>id number</th><th>Username</th><th>eMail value</th><th>age value</th></tr></thead><tbody>';
 				for (var i in result) {
-					output+="<tr class="+result[i].id+"><td>" + result[i].id + "</td><td>" + result[i].userName  + "</td><td>" + result[i].eMail + "</td><td>" + result[i].age + "</td><td><input data-updId="+result[i].id+" class='btn-upd' type='button' name='update' value='Update'></td><td><input data-fileid="+result[i].id+" class='btn-del' type='button' name='delete' value='Delete'></td></tr>";
+					output+="<tr class="+result[i].id+"><td>" + result[i].id + "</td><td>" + result[i].userName  + "</td><td>" + result[i].eMail + "</td><td>" + result[i].age + "</td><td><input data-updid="+result[i].id+" class='btn-upd' type='button' name='update' value='Update'></td><td><input data-fileid="+result[i].id+" class='btn-del' type='button' name='delete' value='Delete'></td></tr>";
 				}
 				output+="</tbody></table>";
 				$( '#listLoad' ).append(output);
+
 				$( '.btn-del' ).click(function(){
 					console.log('veikia delete');
 					event.stopPropagation();
 					event.stopImmediatePropagation();
-					let id=$(this).data('fileid');
+					var id=$(this).data('fileid');
 					$( 'tr' ).remove('.'+id); // tik istrina lenteleje eilute, bet ne irasa serveryje
+				});
+
+				$( '.btn-upd' ).click(function () {
+					alert('veikia iraso update');
+					$( '#forma' ).html('');
+					var id=$(this).data('updid');
+					$.ajax({
+						url:'http://192.168.1.81:8080/list',
+						type: 'GET',
+						success: function(result) {
+							console.log(result);
+							var output='';
+							for (var i in result) {
+								if(result[i].id==id) {
+									output = '<form name="serverForm" style="text-align:left;" action="index.html" method="post"><div class="row"><label for="id" class="col-md-2">ID </label><input id="id" class="col-md-2" type="text" name="id" value="'+result[i].id+'" /></div><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" value="'+result[i].userName+'" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" value="'+result[i].eMail+'" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" value="'+result[i].age+'" /></div><div class="row"><input id="btn-update" class="col-md-2" type="button" name="update" value="Update"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="Cancel"></div></form>';
+									$( '#forma' ).append(output);
+								}
+							}
+							$( "#btn-update" ).click(function () {
+								alert("veikia update");
+								let id = document.forms["serverForm"]["id"].value;
+								let user = document.forms["serverForm"]["user"].value;
+								let email = document.forms["serverForm"]["email"].value;
+								let uAge = document.forms["serverForm"]["age"].value;
+								let form = {
+									id: parseInt(id),
+									userName: user,
+									eMail: email,
+									age: parseInt(uAge)
+								};
+								let userEntry = JSON.stringify(form);
+								console.log(userEntry);
+								$.ajax({
+									url:'http://192.168.1.81:8080/update',
+									data: userEntry,
+									contentType: 'application/json',
+									type: 'POST',
+									dataType: 'json',
+									success: function(data) {
+										console.log(data);
+										$( serverForm ).remove();
+									}
+								});
+							});
+
+							$( '#btn-cancel' ).click(function () {
+								alert("veikia cancel");
+								$( serverForm ).remove();
+							});
+						}
+					});
 				});
 			}
 		});
 	});
 
 
-	$( '.btnupd' ).click(function () {
-		alert('veikia iraso update');
-		$( '#forma' ).append(myNewForm);
 		// $.ajax({
 		// 	url:'http://192.168.1.81:8080/list',
 		// 	type: 'GET',
@@ -206,16 +251,15 @@ $( document ).ready(function() {
 		// 	success: function(data) {
 		// 		console.log(data);
 		// 	}
-	});
 
 
 
 
 	// testui
-	$( 'a' ).click(function( event ) {
-		alert( "As you can see, the link no longer took you to jquery.com" );
-		event.preventDefault();
-	});
+	// $( 'a' ).click(function( event ) {
+	// 	alert( "As you can see, the link no longer took you to jquery.com" );
+	// 	event.preventDefault();
+	// });
 
 	// su XML iskviecia sarasa i p
 	// $( "#btn-list" ).click(function () {
