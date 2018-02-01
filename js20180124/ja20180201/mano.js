@@ -126,30 +126,14 @@ function saveClick() {
 		urlas = "http://192.168.1.81:8080/update";
 	}
 	entry = JSON.stringify(entry);
-	$.ajax({
-		type: 'POST',
-		url: urlas,
-		contentType: 'application/json',
-		data: entry,
-		dataType: 'json',
-		success: function(data) {
-			if (data.error) {
-				alert(data.error);
-			} else {
-				showList();
-			}
-		},
-		error: function (response) {
-			alert('Error: '+response);
-		}
-	});
+	ajaxIskvietimas(entry, urlas);
 }
 function cancelClick() {
 	$( '#myContent' ).empty();
 	showList();
 }
 function updRecord() {
-	alert('upd '+this.value);
+	// alert('upd '+this.value);
 	let o;
 	for (var i = 0; i < allData.length; i++) {
 		if (allData[i].id==this.value) {
@@ -166,25 +150,29 @@ function updRecord() {
 	$( '#myContent' ).append($( cancelButton ));
 }
 function delRecord() {
-	let recordToDelete = {
+	let entry = {
 		id: parseInt(this.value)
 	};
-	recordToDelete = JSON.stringify(recordToDelete);
+	entry = JSON.stringify(entry);
+	let urlas = 'http://192.168.1.81:8080/delete';
+	ajaxIskvietimas(entry, urlas);
+}
+function ajaxIskvietimas (entry, urlas) {
 	$.ajax({
-		type: 'POST',
-		url:'http://192.168.1.81:8080/delete',
-		contentType: 'application/json',
-		data: recordToDelete,
-		dataType: 'json',
-		success: function(data) {
-			if (data.error) {
-				alert(data.error);
-			} else {
-				showList();
-			}
-		},
-		error: function (response) {
-			alert('Error: '+response);
+	type: 'POST',
+	url: urlas,
+	contentType: 'application/json',
+	data: entry,
+	dataType: 'json',
+	success: function(data) {
+		if (data.error) {
+			alert(data.error);
+		} else {
+			showList();
 		}
-	});
+	},
+	error: function (response) {
+		alert('Error: '+response);
+	}
+});
 }
