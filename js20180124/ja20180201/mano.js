@@ -6,7 +6,6 @@ $(function() {
 	$( '#newButton' ).click( addRecord );
 });
 let allData = []; //globalus kintamasis
-
 // galime aprasyti sitas funkcijas isoreje nuo document ready dalies, vykdys jas tik kai kviesim viduje, bet bus pasiekiamos visur
 // kad butu pagrindiniam scope, kad neapterstu atminties, jei butu document-ready scopo viduj - tas scopas nemirtu, uzimtu atminti
 function showList () {
