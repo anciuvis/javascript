@@ -10,7 +10,6 @@ let allData = []; //globalus kintamasis
 // galime aprasyti sitas funkcijas isoreje nuo document ready dalies, vykdys jas tik kai kviesim viduje, bet bus pasiekiamos visur
 // kad butu pagrindiniam scope, kad neapterstu atminties, jei butu document-ready scopo viduj - tas scopas nemirtu, uzimtu atminti
 function showList () {
-	// alert ('list');
 	$( '#myContent' ).empty();
 	$.ajax({
 		type: 'GET',
@@ -72,10 +71,10 @@ function addForm(o) {
 	let idInput = $('<input>');
 	if (o) {
 		idInput.val(o.id);
+		idInput.attr('id','idNr');
+		idInput.attr('type','hidden');
+		formDiv.append($( idInput ));
 	}
-	idInput.attr('id','idNr');
-	idInput.attr('type','hidden');
-	formDiv.append($( idInput ));
 
 	formDiv.append($( '<h4>User Name:</h4>' ));
 	let userNameInput = $('<input>');
@@ -107,7 +106,6 @@ function addForm(o) {
 	return formDiv;
 }
 function addRecord () {
-	// alert ('new');
 	$( '#myContent' ).append(addForm());
 	let saveButton = $( '<button>Save</button>' );
 	saveButton.click(saveClick);
@@ -117,16 +115,20 @@ function addRecord () {
 	$( '#myContent' ).append($( cancelButton ));
 }
 function saveClick() {
-	// alert ('save');
 	let entry = {
 		userName: $( '#userName' ).val(),
 		eMail: $( '#eMail' ).val(),
 		age: parseInt($( '#age' ).val())
 	};
+	let urlas = "http://192.168.1.81:8080/add";
+	if ($( '#idNr' ).length > 0) {
+		entry.id = parseInt($( '#idNr' ).val());
+		urlas = "http://192.168.1.81:8080/update";
+	}
 	entry = JSON.stringify(entry);
 	$.ajax({
 		type: 'POST',
-		url:'http://192.168.1.81:8080/add',
+		url: urlas,
 		contentType: 'application/json',
 		data: entry,
 		dataType: 'json',
@@ -157,7 +159,7 @@ function updRecord() {
 	}
 	$( '#myContent' ).append(addForm(o));
 	let postUpdButton = $( '<button>Post Update</button>' );
-	postUpdButton.click(updateClick);
+	postUpdButton.click(saveClick);
 	$( '#myContent' ).append($( postUpdButton ));
 	let cancelButton = $( '<button>Cancel</button>' );
 	cancelButton.click(cancelClick);
@@ -185,32 +187,4 @@ function delRecord() {
 			alert('Error: '+response);
 		}
 	});
-}
-function updateClick() {
-	alert('veikia post update');
-	let entry = {
-		id: parseInt($( '#idNr' ).val()),
-		userName: $( '#userName' ).val(),
-		eMail: $( '#eMail' ).val(),
-		age: parseInt($( '#age' ).val())
-	};
-	entry = JSON.stringify(entry);
-	$.ajax({
-		type: 'POST',
-		url:'http://192.168.1.81:8080/update',
-		contentType: 'application/json',
-		data: entry,
-		dataType: 'json',
-		success: function(data) {
-			if (data.error) {
-				alert(data.error);
-			} else {
-				showList();
-			}
-		},
-		error: function (response) {
-			alert('Error: '+response);
-		}
-	});
-
 }
