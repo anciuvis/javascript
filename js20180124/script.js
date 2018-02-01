@@ -159,10 +159,9 @@ $( document ).ready( function() {
 			type: 'GET',
 			success: function(result) {
 				console.log(result);
-				let output='<table><thead><tr><th>id number</th><th>Username</th><th>eMail value</th><th>age value</th></tr></thead><tbody>';
+				let output='<table><thead><tr><th>ID number</th><th>Username</th><th>eMail</th><th>age value</th></tr></thead><tbody>';
 				for (var i in result) {
-					let tdUser = "<td>"+result[i].userName+"</td>"
-					output+="<tr class="+result[i].id+"><td>"+result[i].id+"</td>"+tdUser+"<td>"+result[i].eMail+ "</td><td>"+result[i].age+"</td><td><input data-updid="+result[i].id+" class='btn-upd' type='button' name='update' value='Update'></td><td><input data-fileid="+result[i].id+" class='btn-del' type='button' name='delete' value='Delete'></td></tr>";
+					output+="<tr class='"+result[i].id+"'><td>"+result[i].id+"</td><td id='tdUser"+result[i].id+"'>"+textify(result[i].userName)+"</td><td>"+textify(result[i].eMail)+ "</td><td>"+result[i].age+"</td><td><input data-updid="+result[i].id+" class='btn-upd' type='button' name='update' value='Update'></td><td><input data-fileid="+result[i].id+" class='btn-del' type='button' name='delete' value='Delete'></td></tr>";
 				}
 				output+="</tbody></table>";
 				$( '#listLoad' ).append(output);
@@ -177,6 +176,7 @@ $( document ).ready( function() {
 					// 	url:'http://192.168.1.81:8080/delete',
 					// 	type: 'POST',
 					// 	success: function(result) {
+					// }
 				});
 
 				$( '.btn-upd' ).click(function() {
@@ -191,7 +191,7 @@ $( document ).ready( function() {
 							var output='<form name="serverForm" style="text-align:left;" action="index.html" method="post">';
 							for (var i in result) {
 								if(result[i].id==id) {
-									output = '<div class="row"><label for="id" class="col-md-2">ID </label><input id="id" class="col-md-2" type="text" name="id" value="'+result[i].id+'" /></div><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" value="'+result[i].userName+'" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" value="'+result[i].eMail+'" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" value="'+result[i].age+'" /></div><div class="row"><input id="btn-update" class="col-md-2" type="button" name="update" value="Update"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="Cancel"></div></form>';
+									output+= '<div class="row"><label for="id" class="col-md-2">ID </label><input id="id" class="col-md-2" type="text" name="id" value="'+result[i].id+'" /></div><div class="row"><label for="user" class="col-md-2">Username </label><input id="user" class="col-md-2" type="text" name="user" value="'+textify(result[i].userName)+'" /></div><div class="row"><label for="email" class="col-md-2">Email </label><input id="email" class="col-md-2" type="text" name="email" value="'+textify(result[i].eMail)+'" /></div><div class="row"><label for="age" class="col-md-2">Age </label><input id="age" class="col-md-2" type="numbers" name="age" value="'+result[i].age+'" /></div><div class="row"><input id="btn-update" class="col-md-2" type="button" name="update" value="Update"><input id="btn-cancel" class="col-md-2" type="reset" name="cancel" value="Cancel"></div></form>';
 									$( '#forma' ).append(output);
 								}
 							}
@@ -233,7 +233,9 @@ $( document ).ready( function() {
 			}
 		});
 	});
-
+	function textify( html ) {
+    return $( $.parseHTML(html) ).text();
+	}
 
 		// $.ajax({
 		// 	url:'http://192.168.1.81:8080/list',
