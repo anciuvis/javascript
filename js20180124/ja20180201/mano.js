@@ -64,26 +64,57 @@ function showList () {
 		}
 	});
 }
-function addRecord () {
-	// alert ('new');
+function addForm(o) {
 	$( '#myContent' ).empty();
 	let formDiv = $( '<div>' );
+	formDiv.append($( '<p>' ));
+
+	let idInput = $('<input>');
+	if (o) {
+		idInput.val(o.id);
+	}
+	idInput.attr('id','idNr');
+	idInput.attr('type','hidden');
+	formDiv.append($( idInput ));
+
 	formDiv.append($( '<h4>User Name:</h4>' ));
-	formDiv.append($( '<input id="userName">'));
+	let userNameInput = $('<input>');
+	if (o) {
+		userNameInput.val(o.userName);
+	}
+	userNameInput.attr('id','userName');
+	formDiv.append($( userNameInput ));
 	formDiv.append($( '<p>' ));
+
 	formDiv.append($( '<h4>Email address:</h4>' ));
-	formDiv.append($( '<input id="eMail">'));
+	let eMailInput = $('<input>');
+	if (o) {
+		eMailInput.val(o.eMail);
+	}
+	eMailInput.attr('id','eMail');
+	formDiv.append($( eMailInput ));
 	formDiv.append($( '<p>' ));
+
 	formDiv.append($( '<h4>Your age:</h4>' ));
-	formDiv.append($( '<input id="age">'));
+	let ageInput = $('<input>');
+	if (o) {
+		ageInput.val(o.age);
+	}
+	ageInput.attr('id','age');
+	formDiv.append($( ageInput ));
 	formDiv.append($( '<p>' ));
-	$( '#myContent' ).append(formDiv);
+
+	return formDiv;
+}
+function addRecord () {
+	// alert ('new');
+	$( '#myContent' ).append(addForm());
 	let saveButton = $( '<button>Save</button>' );
 	saveButton.click(saveClick);
-	formDiv.append($( saveButton ));
+	$( '#myContent' ).append($( saveButton ));
 	let cancelButton = $( '<button>Cancel</button>' );
 	cancelButton.click(cancelClick);
-	formDiv.append($( cancelButton ));
+	$( '#myContent' ).append($( cancelButton ));
 }
 function saveClick() {
 	// alert ('save');
@@ -124,27 +155,13 @@ function updRecord() {
 			break;
 		}
 	}
-	$( '#myContent' ).empty();
-	let formDiv = $( '<div>' );
-	formDiv.append($( '<h4>User Name:</h4>' ));
-	formDiv.append($( '<input id="userName">'));
-	formDiv.append($( '<p>' ));
-	formDiv.append($( '<h4>Email address:</h4>' ));
-	formDiv.append($( '<input id="eMail">'));
-	formDiv.append($( '<p>' ));
-	formDiv.append($( '<h4>Your age:</h4>' ));
-	formDiv.append($( '<input id="age">'));
-	formDiv.append($( '<p>' ));
-	$( '#myContent' ).append(formDiv);
-	$( '#userName' ).val(o.userName);
-	$( '#eMail' ).val(o.eMail);
-	$( '#age' ).val(o.age);
+	$( '#myContent' ).append(addForm(o));
 	let postUpdButton = $( '<button>Post Update</button>' );
-	postUpdButton.click(postUpdClick);
-	formDiv.append($( postUpdButton ));
+	postUpdButton.click(updateClick);
+	$( '#myContent' ).append($( postUpdButton ));
 	let cancelButton = $( '<button>Cancel</button>' );
 	cancelButton.click(cancelClick);
-	formDiv.append($( cancelButton ));
+	$( '#myContent' ).append($( cancelButton ));
 }
 function delRecord() {
 	let recordToDelete = {
@@ -169,6 +186,31 @@ function delRecord() {
 		}
 	});
 }
-function postUpdClick() {
+function updateClick() {
 	alert('veikia post update');
+	let entry = {
+		id: parseInt($( '#idNr' ).val()),
+		userName: $( '#userName' ).val(),
+		eMail: $( '#eMail' ).val(),
+		age: parseInt($( '#age' ).val())
+	};
+	entry = JSON.stringify(entry);
+	$.ajax({
+		type: 'POST',
+		url:'http://192.168.1.81:8080/update',
+		contentType: 'application/json',
+		data: entry,
+		dataType: 'json',
+		success: function(data) {
+			if (data.error) {
+				alert(data.error);
+			} else {
+				showList();
+			}
+		},
+		error: function (response) {
+			alert('Error: '+response);
+		}
+	});
+
 }
