@@ -6,12 +6,17 @@ $(function() {
 	$( '#newButton' ).click( addRecord );
 });
 let allData = []; //globalus kintamasis
-let allLocalData = {};
+// localStorage.removeItem('data');
+let allLocalData = JSON.parse(localStorage.getItem('data'));
+	if(!allLocalData) {
+		allLocalData = {};
+	}
+let currentKeys = Object.keys(allLocalData);
 // galime aprasyti sitas funkcijas isoreje nuo document ready dalies, vykdys jas tik kai kviesim viduje, bet bus pasiekiamos visur
 // kad butu pagrindiniam scope, kad neapterstu atminties, jei butu document-ready scopo viduj - tas scopas nemirtu, uzimtu atminti
 function showList () {
 	$( '#myContent' ).empty();
-	formList();
+	formList(allLocalData);
 	// $.ajax({
 	// 	type: 'GET',
 	// 	url:'http://192.168.1.81:8080/list',
@@ -72,8 +77,7 @@ function addForm(o) {
 
 	let idInput = $('<input>');
 	if (o) {
-		// idInput.val(o.id);
-		idInput.val(localStorage.itemName);
+		idInput.val(o.id);
 		idInput.attr('id','idNr');
 		idInput.attr('type','hidden');
 		formDiv.append($( idInput ));
@@ -120,27 +124,24 @@ function addRecord () {
 function saveClick() {
 	// let urlas = "http://192.168.1.81:8080/add";
 
-	if (localStorage.itemName) {
-		localStorage.itemName = localStorage.itemName + 1;
-	} else {
-		localStorage.itemName = 0;
-	}
 	let entry = {
-		id: parseInt(localStorage.itemName),
 		userName: $( '#userName' ).val(),
 		eMail: $( '#eMail' ).val(),
 		age: parseInt($( '#age' ).val())
 	};
 	if ($( '#idNr' ).length > 0) {
 		entry.id = parseInt($( '#idNr' ).val());
-		urlas = "http://192.168.1.81:8080/update";
+		// urlas = "http://192.168.1.81:8080/update";
+	} else if(currentKeys.length > 0) {
+    entry.id = parseInt(currentKeys.pop()) + 1;
+	} else {
+		entry.id = 0;
 	}
-	allLocalData[parseInt(localStorage.itemName)] = entry;
-	allLocalData = JSON.stringify(allLocalData);
-	localStorage.setItem( 'data', allLocalData);
+	allLocalData[entry.id] = entry;
+	localStorage.setItem( 'data', JSON.stringify(allLocalData));
 	console.log(allLocalData);
 	console.log(JSON.parse(localStorage.getItem('data')));
-	// showList();
+	showList();
 	// ajaxIskvietimas(entry, urlas);
 }
 function cancelClick() {
@@ -156,9 +157,12 @@ function updRecord() {
 	// 		break;
 	// 	}
 	// }
-	for (var i = 0; i < localStorage.itemName.length; i++) {
-		if (localStorage.itemName==this.value) {
-			o = JSON.parse(localStorage.getItem(localStorage.itemName));
+
+	for (let prop in allLocalData) {
+		// console.log(currentKeys[i]);
+		console.log(this.value);
+		if (prop==this.value) {
+			o = allLocalData[prop];
 			break;
 		}
 	}
@@ -177,7 +181,13 @@ function delRecord() {
 	// entry = JSON.stringify(entry);
 	// let urlas = 'http://192.168.1.81:8080/delete';
 	// ajaxIskvietimas(entry, urlas);
-	localStorage.removeItem(this.value);
+	console.log(this.value);
+	let prop = this.value;
+	delete allLocalData.prop;
+	localStorage.setItem( 'data', JSON.stringify(allLocalData));
+	console.log(JSON.parse(localStorage.getItem('data')));
+	allLocalData = JSON.parse(localStorage.getItem('data'));
+	showList();
 }
 function ajaxIskvietimas (entry, urlas) {
 	$.ajax({
@@ -198,39 +208,41 @@ function ajaxIskvietimas (entry, urlas) {
 	}
 });
 }
-function formList (data) {
-	allData = data;
+function formList (allLocalData) {
 	let table = $( '<table>' );
-	for (let i in data) {
-		let row = $( '<tr>' );
-		let cell = $( '<td>' );
-		cell.text(data[i].id);
-		// surisam tr su td - padedam i vidu ji:
-		row.append(cell);
-		cell = $( '<td>' );
-		cell.text(data[i].userName);
-		row.append(cell);
-		cell = $( '<td>' );
-		cell.text(data[i].eMail);
-		row.append(cell);
-		cell = $( '<td>' );
-		cell.text(data[i].age);
-		row.append(cell);
-		cell = $( '<td>' );
-		let updButton = $( '<button>Update</button>' );
-		cell.append(updButton);
-		row.append(cell);
-		updButton.attr('value',data[i].id);
-		updButton.click(updRecord);
-		cell = $( '<td>' );
-		let delButton = $( '<button>Delete</button>' );
-		cell.append(delButton);
-		row.append(cell);
-		delButton.attr('value',data[i].id);
-		delButton.click(delRecord);
-		// table suzino apie pirma eilute:
-		table.append(row);
-		// pirmoj iteracijos pabaigoje mirsta kintamieji row bei cell, bet ne table - jis uz ciklo ribu, su nuorodom i appendinus objektus
-
-}
+	for (let property in allLocalData) {
+		if (allLocalData.hasOwnProperty(property)) {
+			// console.log(allLocalData[property]);
+			// console.log(allLocalData[property].id);
+			let row = $( '<tr>' );
+			let cell = $( '<td>' );
+			cell.text(allLocalData[property].id);
+			row.append(cell);
+			cell = $( '<td>' );
+			cell.text(allLocalData[property].userName);
+			row.append(cell);
+			cell = $( '<td>' );
+			cell.text(allLocalData[property].eMail);
+			row.append(cell);
+			cell = $( '<td>' );
+			cell.text(allLocalData[property].age);
+			row.append(cell);
+			cell = $( '<td>' );
+			let updButton = $( '<button>Update</button>' );
+			cell.append(updButton);
+			row.append(cell);
+			updButton.attr('value',allLocalData[property].id);
+			updButton.click(updRecord);
+			cell = $( '<td>' );
+			let delButton = $( '<button>Delete</button>' );
+			cell.append(delButton);
+			row.append(cell);
+			delButton.attr('value',allLocalData[property].id);
+			delButton.click(delRecord);
+			// table suzino apie pirma eilute:
+			table.append(row);
+			// pirmoj iteracijos pabaigoje mirsta kintamieji row bei cell, bet ne table - jis uz ciklo ribu, su nuorodom i appendinus objektus
+			$( '#myContent' ).append(table);
+		}
+	}
 }
