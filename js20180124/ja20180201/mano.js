@@ -6,61 +6,64 @@ $(function() {
 	$( '#newButton' ).click( addRecord );
 });
 let allData = []; //globalus kintamasis
+let allLocalData = {};
 // galime aprasyti sitas funkcijas isoreje nuo document ready dalies, vykdys jas tik kai kviesim viduje, bet bus pasiekiamos visur
 // kad butu pagrindiniam scope, kad neapterstu atminties, jei butu document-ready scopo viduj - tas scopas nemirtu, uzimtu atminti
 function showList () {
 	$( '#myContent' ).empty();
-	$.ajax({
-		type: 'GET',
-		url:'http://192.168.1.81:8080/list',
-		// sita funkcija asinchronine - nezinom kada baigsis (ilgai krausis nuotolinis servas)
-		// - paleidom uzklausa i serveri, ir tuom baigaisi darbas - funkcija showList atidirbo
-		// kai gaunam atsakyma (success/error) - tada isijungia viena is dvieju situ funkciju priklausomai nuo atsakymo
-		success: function (data) {
-			console.log(data);
-			allData = data;
-			// sukuria objekta ir ji grazina i RAMa (ne DOMa)
-			let table = $( '<table>' );
-			for (let i in data) {
-				// <tr> taip pat kaba Rame kaip tuscias objektas - ne DOMe dar
-				let row = $( '<tr>' );
-				// <td> irgi kaba atskirai, ne DOMe, ne <tr> dar
-				let cell = $( '<td>' );
-				// pridedam i vidu sito cello reiksme konkretaus pirmo elemento id reiksme
-				cell.text(data[i].id);
-				// surisam tr su td - padedam i vidu ji:
-				row.append(cell);
-				cell = $( '<td>' );
-				cell.text(data[i].userName);
-				row.append(cell);
-				cell = $( '<td>' );
-				cell.text(data[i].eMail);
-				row.append(cell);
-				cell = $( '<td>' );
-				cell.text(data[i].age);
-				row.append(cell);
-				cell = $( '<td>' );
-				let updButton = $( '<button>Update</button>' );
-				cell.append(updButton);
-				row.append(cell);
-				updButton.attr('value',data[i].id);
-				updButton.click(updRecord);
-				cell = $( '<td>' );
-				let delButton = $( '<button>Delete</button>' );
-				cell.append(delButton);
-				row.append(cell);
-				delButton.attr('value',data[i].id);
-				delButton.click(delRecord);
-				// table suzino apie pirma eilute:
-				table.append(row);
-				// pirmoj iteracijos pabaigoje mirsta kintamieji row bei cell, bet ne table - jis uz ciklo ribu, su nuorodom i appendinus objektus
-			}
-			$( '#myContent' ).append(table);
-		},
-		error: function (response) { // response - arba narsykle sugeneruota, arba serverio atsakymas
-			alert('Error: '+response);
-		}
-	});
+	formList();
+	// $.ajax({
+	// 	type: 'GET',
+	// 	url:'http://192.168.1.81:8080/list',
+	// 	// sita funkcija asinchronine - nezinom kada baigsis (ilgai krausis nuotolinis servas)
+	// 	// - paleidom uzklausa i serveri, ir tuom baigaisi darbas - funkcija showList atidirbo
+	// 	// kai gaunam atsakyma (success/error) - tada isijungia viena is dvieju situ funkciju priklausomai nuo atsakymo
+	// 	success: function (data) {
+	// 		console.log(data);
+	// 		allData = data;
+	// 		// sukuria objekta ir ji grazina i RAMa (ne DOMa)
+	// 		let table = $( '<table>' );
+	// 		for (let i in data) {
+	// 			// <tr> taip pat kaba Rame kaip tuscias objektas - ne DOMe dar
+	// 			let row = $( '<tr>' );
+	// 			// <td> irgi kaba atskirai, ne DOMe, ne <tr> dar
+	// 			let cell = $( '<td>' );
+	// 			// pridedam i vidu sito cello reiksme konkretaus pirmo elemento id reiksme
+	// 			cell.text(data[i].id);
+	// 			// surisam tr su td - padedam i vidu ji:
+	// 			row.append(cell);
+	// 			cell = $( '<td>' );
+	// 			cell.text(data[i].userName);
+	// 			row.append(cell);
+	// 			cell = $( '<td>' );
+	// 			cell.text(data[i].eMail);
+	// 			row.append(cell);
+	// 			cell = $( '<td>' );
+	// 			cell.text(data[i].age);
+	// 			row.append(cell);
+	// 			cell = $( '<td>' );
+	// 			let updButton = $( '<button>Update</button>' );
+	// 			cell.append(updButton);
+	// 			row.append(cell);
+	// 			updButton.attr('value',data[i].id);
+	// 			updButton.click(updRecord);
+	// 			cell = $( '<td>' );
+	// 			let delButton = $( '<button>Delete</button>' );
+	// 			cell.append(delButton);
+	// 			row.append(cell);
+	// 			delButton.attr('value',data[i].id);
+	// 			delButton.click(delRecord);
+	// 			// table suzino apie pirma eilute:
+	// 			table.append(row);
+	// 			// pirmoj iteracijos pabaigoje mirsta kintamieji row bei cell, bet ne table - jis uz ciklo ribu, su nuorodom i appendinus objektus
+  //
+	// 		}
+	// 		$( '#myContent' ).append(table);
+	// 	},
+	// 	error: function (response) { // response - arba narsykle sugeneruota, arba serverio atsakymas
+	// 		alert('Error: '+response);
+	// 	}
+	// });
 }
 function addForm(o) {
 	$( '#myContent' ).empty();
@@ -69,7 +72,8 @@ function addForm(o) {
 
 	let idInput = $('<input>');
 	if (o) {
-		idInput.val(o.id);
+		// idInput.val(o.id);
+		idInput.val(localStorage.itemName);
 		idInput.attr('id','idNr');
 		idInput.attr('type','hidden');
 		formDiv.append($( idInput ));
@@ -114,18 +118,30 @@ function addRecord () {
 	$( '#myContent' ).append($( cancelButton ));
 }
 function saveClick() {
+	// let urlas = "http://192.168.1.81:8080/add";
+
+	if (localStorage.itemName) {
+		localStorage.itemName = localStorage.itemName + 1;
+	} else {
+		localStorage.itemName = 0;
+	}
 	let entry = {
+		id: parseInt(localStorage.itemName),
 		userName: $( '#userName' ).val(),
 		eMail: $( '#eMail' ).val(),
 		age: parseInt($( '#age' ).val())
 	};
-	let urlas = "http://192.168.1.81:8080/add";
 	if ($( '#idNr' ).length > 0) {
 		entry.id = parseInt($( '#idNr' ).val());
 		urlas = "http://192.168.1.81:8080/update";
 	}
-	entry = JSON.stringify(entry);
-	ajaxIskvietimas(entry, urlas);
+	allLocalData[parseInt(localStorage.itemName)] = entry;
+	allLocalData = JSON.stringify(allLocalData);
+	localStorage.setItem( 'data', allLocalData);
+	console.log(allLocalData);
+	console.log(JSON.parse(localStorage.getItem('data')));
+	// showList();
+	// ajaxIskvietimas(entry, urlas);
 }
 function cancelClick() {
 	$( '#myContent' ).empty();
@@ -134,9 +150,15 @@ function cancelClick() {
 function updRecord() {
 	// alert('upd '+this.value);
 	let o;
-	for (var i = 0; i < allData.length; i++) {
-		if (allData[i].id==this.value) {
-			o = allData[i];
+	// for (var i = 0; i < allData.length; i++) {
+	// 	if (allData[i].id==this.value) {
+	// 		o = allData[i];
+	// 		break;
+	// 	}
+	// }
+	for (var i = 0; i < localStorage.itemName.length; i++) {
+		if (localStorage.itemName==this.value) {
+			o = JSON.parse(localStorage.getItem(localStorage.itemName));
 			break;
 		}
 	}
@@ -149,12 +171,13 @@ function updRecord() {
 	$( '#myContent' ).append($( cancelButton ));
 }
 function delRecord() {
-	let entry = {
-		id: parseInt(this.value)
-	};
-	entry = JSON.stringify(entry);
-	let urlas = 'http://192.168.1.81:8080/delete';
-	ajaxIskvietimas(entry, urlas);
+	// let entry = {
+	// 	id: parseInt(this.value)
+	// };
+	// entry = JSON.stringify(entry);
+	// let urlas = 'http://192.168.1.81:8080/delete';
+	// ajaxIskvietimas(entry, urlas);
+	localStorage.removeItem(this.value);
 }
 function ajaxIskvietimas (entry, urlas) {
 	$.ajax({
@@ -174,4 +197,40 @@ function ajaxIskvietimas (entry, urlas) {
 		alert('Error: '+response);
 	}
 });
+}
+function formList (data) {
+	allData = data;
+	let table = $( '<table>' );
+	for (let i in data) {
+		let row = $( '<tr>' );
+		let cell = $( '<td>' );
+		cell.text(data[i].id);
+		// surisam tr su td - padedam i vidu ji:
+		row.append(cell);
+		cell = $( '<td>' );
+		cell.text(data[i].userName);
+		row.append(cell);
+		cell = $( '<td>' );
+		cell.text(data[i].eMail);
+		row.append(cell);
+		cell = $( '<td>' );
+		cell.text(data[i].age);
+		row.append(cell);
+		cell = $( '<td>' );
+		let updButton = $( '<button>Update</button>' );
+		cell.append(updButton);
+		row.append(cell);
+		updButton.attr('value',data[i].id);
+		updButton.click(updRecord);
+		cell = $( '<td>' );
+		let delButton = $( '<button>Delete</button>' );
+		cell.append(delButton);
+		row.append(cell);
+		delButton.attr('value',data[i].id);
+		delButton.click(delRecord);
+		// table suzino apie pirma eilute:
+		table.append(row);
+		// pirmoj iteracijos pabaigoje mirsta kintamieji row bei cell, bet ne table - jis uz ciklo ribu, su nuorodom i appendinus objektus
+
+}
 }
