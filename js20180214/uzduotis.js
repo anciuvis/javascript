@@ -16,10 +16,16 @@ let minDist = 1;
 let maxDist = 100;
 let minCount = 1;
 let maxCount = 5;
-let speed = 500;
+let speedShow = 500;
+let speedSpeed = 2000;
 let allCars = [];
 let myFun ='';
 let cumulDist = 0;
+let speedChange;
+
+function getRandomInt(max) {
+	return Math.floor(Math.random() * Math.floor(max));
+}
 
 function validateForm(cCount, dist) {
 	console.log('Validate prasideda');
@@ -65,16 +71,30 @@ function clock() {
 	if (cumulDist < race.dist) {
 		console.log('ok');
 		raceGoing();
+	} else {
+		console.log('zaidimo pabaiga');
+		clearInterval(myFun);
+		// myFun = null;
+		// cumulDist = 0;
 	}
-	clearInterval(myFun);
-	// myFun = null;
-	// cumulDist = 0;
 }
 
 function raceGoing() {
-	cumulDist+=1;
-	console.log(cumulDist);
+	// cumulDist++;
+	// console.log(cumulDist);
+	let count = 1;
+	for (let i = 0; i < allCars.length; i++) {
+		speedChange= getRandomInt(6)*Math.random() < 0.5 ? -1 : 1;
+		allCars[i].speed = Math.min(150,Math.max(0, allCars[i].speed+speedChange));
+		allCars[i].dist += allCars[i].speed*(count/7200);
+		console.log(i+" masinos atstumas "+allCars[i].dist+" km");
+		console.log(i+" masinos greitis "+allCars[i].speed+" km/h");
+
+	}
+
 }
+
+
 
 function compareDist(a,b) {
 	if (a.dist < b.dist)
@@ -95,13 +115,14 @@ function startRace() {
 	allCars = createCars(race.cCount, race.dist);
 	// return;
 	// raceGoing();
-	myFun = setInterval(clock, speed);
+
+	myFun = setInterval(clock, speedShow);
 	// return;
 }
 
-function Car(pav) {
-	this.number=pav;
-	this.speed=0;
+function Car(name) {
+	this.name=name;
+	this.speed=1;
 	this.dist=0;
 }
 //
