@@ -122,7 +122,7 @@ function startRace() {
 
 function Car(name) {
 	this.name=name;
-	this.speed=1;
+	this.speed=0;
 	this.dist=0;
 }
 //
