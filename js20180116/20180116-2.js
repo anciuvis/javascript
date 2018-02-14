@@ -1,4 +1,4 @@
-var notAllow = "Required fields must NOT be empty";
+// var notAllow = "Required fields must NOT be empty";
 
 function validateForm() {
 	console.log('Validate nuspaustas');
@@ -20,7 +20,7 @@ function validateForm() {
 	console.log(langEn);
 	var langOther = document.getElementById('langOther');
 	console.log(langOther);
-
+}
 
 	// 	if (user == ""||pass == ""||name == ""||country == ""||email == ""||sex == "") {
 	// 		alert(notAllow);
