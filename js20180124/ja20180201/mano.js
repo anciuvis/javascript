@@ -1,7 +1,7 @@
 // nuejom i DOMa, uzkrovem viska body, ir tik po to kviecia sita funkcija
 // Shorthand for $( document ).ready():
 $(function() {
-	// $( '#...' ) - grazina sarasa, su vienu objektu (pagal ID) sarase. tam vienam elementui uzdedama funkcija click'o
+	// $( '#...' ) - grazina SARASA, su vienu objektu (pagal ID) sarase. tam vienam elementui uzdedama funkcija click'o
 	$( '#listButton' ).click( showList );
 	$( '#newButton' ).click( addRecord );
 });
@@ -72,7 +72,8 @@ function showList () {
 }
 function addForm(o) {
 	$( '#myContent' ).empty();
-	let formDiv = $( '<div>' );
+
+	let formDiv = $( '<form>' );
 	formDiv.append($( '<p>' ));
 
 	let idInput = $('<input>');
