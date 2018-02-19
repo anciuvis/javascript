@@ -14,11 +14,11 @@ var canvas = document.getElementById("mycanvas");
 var ctx = canvas.getContext("2d");
 var centerX = canvas.width/2;
 var centerY = canvas.height/2;
-var steps = 200;
-var incr = Math.PI/steps;
 var start = null;
-var speed = 8000;
-var rotateCount = 20;
+var rotateCount = 62;
+var steps = 1000;
+var incr = Math.PI/steps;
+var speed = 5000;
 
 function update(timeStamp) {
   if (!start) {
@@ -30,11 +30,12 @@ function update(timeStamp) {
   ctx.moveTo(centerX,centerY);
 
   while (curIncr < progress*rotateCount*Math.PI) {
-		let width = curIncr/9;
+		let width = curIncr/8;
     let newX = centerX + curIncr*Math.cos(curIncr)* width;
     let newY = centerY + curIncr*Math.sin(curIncr)* width;
-		ctx.fillStyle = 'rgb('+Math.floor(255 - 6*curIncr)+', '+Math.floor(0 + 5*curIncr)+', '+Math.floor(255 - 2*curIncr)+')';
-		ctx.strokeStyle = 'rgb('+Math.floor(0 + 6*curIncr)+', '+Math.floor(255 - 5*curIncr)+', '+Math.floor(0 + 2*curIncr)+')';
+		ctx.fillStyle = 'rgb('+Math.floor(255 - 3*curIncr)+', '+Math.floor(0 + 2*curIncr)+', '+Math.floor(255 - 0.5*curIncr)+')';
+		ctx.strokeStyle = 'rgb('+Math.floor(0 + 3*curIncr)+', '+Math.floor(255 - 2*curIncr)+', '+Math.floor(0 + 0.5*curIncr)+')';
+		ctx.lineWidth=0.8*curIncr;
     ctx.lineTo(newX,newY);
 		curIncr += incr;
   }
@@ -45,4 +46,8 @@ function update(timeStamp) {
   }
 }
 requestAnimationFrame(update);
-//
+// galimas uzrasymo variantas:
+// var a = 15;
+// var b = 5;
+// var s = "As turiu "+a+" obuolius";
+// var sp = `As turiu ${a+b} obuolius`; // susumuos
