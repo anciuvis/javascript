@@ -129,10 +129,13 @@
 // startRace();
 
 //DESTYTOJO SPRENDIMAS
-function Car(name) {
+function Car(name, lane) {
 	this.name=name;
 	this.speed=0;
 	this.dist=0;
+	this.lane=lane;
+	this.cardiv=$("<div style='top: 0; left:"+this.lane*25+"px; width: 20px; height: 20px; border: solid 1px green;'></div>");
+	this.cardiv.appendTo(document.body);
 }
 
 Car.prototype.speedup = function(s) {
@@ -163,7 +166,7 @@ if (cc>0) {
 		riid = setInterval(race, 500);
 		siid = setInterval(speedChange, 2000);
 		for (let i = 0; i < cc; i++) {
-			allCars.push(new Car("Car"+i));
+			allCars.push(new Car("Car"+i, i));
 		}
 	} else {
 		alert ('bad Race distance!');
@@ -185,7 +188,7 @@ function race() {
 	let winner= -1;
 	for (let i = 0; i < allCars.length; i++) {
 		allCars[i].move(0.5);
-		console.log('Car '+allCars[i].name+' speed '+allCars[i].speed+' distance '+allCars[i].dist);
+		console.log('Car: '+allCars[i].name+' speed: '+allCars[i].speed+' distance: '+allCars[i].dist+' lane: '+allCars[i].lane+);
 		if (allCars[i].dist>=rd) {
 			winner=i;
 			break;
@@ -197,6 +200,6 @@ function race() {
 		console.log('the winner is '+winner+' car');
 	}
 	for (let i = 0; i < allCars.length; i++) {
-		console.log('Car '+allCars[i].name+' speed'+allCars[i].speed+' distance'+allCars[i].dist);
+		console.log('Car '+allCars[i].name+' speed'+allCars[i].speed+' distance'+allCars[i].dist+' lane: '+allCars[i].lane+);
 	}
 }
